@@ -13,6 +13,7 @@ IDs
   — https://claude.ai/artifact/HQ92XFrsMg2bJwys4dKNgR
 - Framework doc (Claude Docs): doc `8d07cd4c-f7b3-4d0c-a3fb-5067a31f56a1`, body node `6083ac32-17bc`
   — https://claude.ai/artifact/JR5DA5kDirRpMWmNsPD19J
+- Live public status page (GitHub Pages from /docs, rebuilt on every tick): https://sammiel.github.io/trader/ — include this link in any message to Samuel; if "pages build and deployment" runs are failing, say so.
 - Test window ends Fri 6 Nov 2026 21:30 UTC (`TEST_END` in `bot/run.py`).
 
 ## Steps
