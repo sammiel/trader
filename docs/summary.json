@@ -1,13 +1,13 @@
 {
-  "updated": "2026-10-30 13:41:55.468382+00:00",
+  "updated": "2026-10-30 13:49:06.659146+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 9983.21,
+  "equity": 9979.32,
   "cash": 8001.9,
-  "return_pct": -0.17,
-  "max_drawdown_pct": -0.15,
+  "return_pct": -0.21,
+  "max_drawdown_pct": -0.19,
   "benchmark_return_pct": {
-    "BTC-USD": -0.33,
+    "BTC-USD": -0.72,
     "SPY": -1.14
   },
   "by_strategy": {
@@ -15,7 +15,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -15.79
+      "unrealized": -19.68
     }
   },
   "open_positions": [
@@ -23,21 +23,21 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 76950.0,
+      "price": 76649.98,
       "stop": 0.0,
-      "value": 994.7,
-      "unrealized": -4.1,
-      "ret_pct": -0.41,
+      "value": 990.82,
+      "unrealized": -7.98,
+      "ret_pct": -0.8,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "core",
       "symbol": "SPY",
       "entry": 769.590793347168,
-      "price": 760.5800170898438,
+      "price": 760.5700073242188,
       "stop": 0.0,
-      "value": 986.61,
-      "unrealized": -11.69,
+      "value": 986.6,
+      "unrealized": -11.7,
       "ret_pct": -1.17,
       "since": "2026-10-30 13:23:43.022220+00:00"
     }
@@ -55,24 +55,35 @@
   "equity_curve": [
     [
       "2026-10-30 13:00:00",
-      9983.21
+      9979.32
     ]
   ],
   "prices": {
-    "BTC-USD": 76950.0,
-    "ETH-USD": 2222.97,
-    "SOL-USD": 95.19,
-    "XRP-USD": 1.2379,
-    "LINK-USD": 11.009,
-    "AVAX-USD": 8.236,
-    "SPY": 760.5800170898438,
-    "QQQ": 696.0780029296875,
-    "IWM": 282.17999267578125
+    "BTC-USD": 76649.98,
+    "ETH-USD": 2212.23,
+    "SOL-USD": 94.7,
+    "XRP-USD": 1.2339,
+    "LINK-USD": 10.933,
+    "AVAX-USD": 8.199,
+    "SPY": 760.5700073242188,
+    "QQQ": 696.4979858398438,
+    "IWM": 281.4800109863281
   },
   "shadow": {
     "equity": 10000.0,
     "return_pct": 0.0,
     "by_strategy": {},
     "open_positions": []
-  }
+  },
+  "berkshire": {
+    "equity": 10000.0,
+    "return_pct": 0.0,
+    "floor": 10000.0,
+    "cushion": 0.0,
+    "interest": 0.0,
+    "trades": 0,
+    "realized": 0.0,
+    "open_positions": []
+  },
+  "active_mode": "normal"
 }
