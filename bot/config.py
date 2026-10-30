@@ -29,6 +29,12 @@ CORE = {"BTC-USD": 0.10, "SPY": 0.10}   # fraction of starting equity
 # --- Strategy parameters --------------------------------------------------
 TREND = dict(timeframe="4h", ema_fast=50, ema_slow=200, breakout=20,
              atr=14, stop_atr=2.5, trail_atr=3.0)
+# Added after the first backtest (30 Oct): same rules on daily candles. The
+# research says crypto momentum held up at multi-day horizons but faded at
+# short ones, and daily bars trade far less, so costs bite less. Treat it as
+# a second look at the data: it must pass the same gate AND the paper test.
+TREND_DAILY = dict(timeframe="1D", ema_fast=50, ema_slow=200, breakout=20,
+                   atr=14, stop_atr=2.5, trail_atr=3.0)
 BOUNCE = dict(timeframe="1h", rsi_len=2, rsi_entry=5, bb_len=20, bb_std=2.5,
               trend_ema=200, exit_sma=5, atr=14, stop_atr=3.0, max_bars=36,
               require_uptrend=True)
@@ -37,6 +43,6 @@ INDEX_PULLBACK = dict(timeframe="1d", sma_long=200, rsi_len=2, rsi_entry=10,
 
 # Strategies only get paper capital if they pass the backtest kill gate.
 # backtest.py rewrites state/enabled.json; these are the fallbacks.
-DEFAULT_ENABLED = {"trend": True, "bounce": True, "index_pullback": True}
+DEFAULT_ENABLED = {"trend": True, "trend_daily": True, "bounce": True, "index_pullback": True}
 
 KILL_GATE = dict(min_trades=30, min_profit_factor=1.15, max_drawdown=0.25)

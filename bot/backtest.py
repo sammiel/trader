@@ -150,8 +150,18 @@ def main():
 
     bounce_any_p = deepcopy(config.BOUNCE)
     bounce_any_p["require_uptrend"] = False
+    trend_d = Trend(config.TREND_DAILY, name="trend_daily")
+    btc1d = trend_d.prepare(crypto["BTC-USD"])["uptrend"]
+
+    def btc_ctx_d(sym, t):
+        if sym == "BTC-USD":
+            return {}
+        v = btc1d.get(t)
+        return {"btc_uptrend": bool(v) if v is not None else None}
+
     runs = {
         "trend": (trend, crypto, btc_ctx, CRYPTO_SPLIT),
+        "trend_daily": (trend_d, crypto, btc_ctx_d, CRYPTO_SPLIT),
         "bounce": (Bounce(), crypto, None, CRYPTO_SPLIT),
         "bounce_no_trend_filter": (Bounce(bounce_any_p, name="bounce_any"), crypto, None, CRYPTO_SPLIT),
         "index_pullback": (IndexPullback(), stocks, None, STOCK_SPLIT),
@@ -176,7 +186,7 @@ def main():
         "index_equal_weight": buy_hold(stocks, pd.Timestamp("2005-01-01"), STOCK_SPLIT)}
 
     enabled = {k: results["strategies"][k]["passes_kill_gate"]
-               for k in ("trend", "bounce", "index_pullback")}
+               for k in ("trend", "trend_daily", "bounce", "index_pullback")}
     enabled["source"] = f"backtest {end}"
     os.makedirs("state", exist_ok=True)
     with open("state/enabled.json", "w") as f:

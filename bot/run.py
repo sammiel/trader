@@ -66,6 +66,12 @@ def main():
             prices[sym] = float(df.close.iloc[-1])
         except Exception as e:  # noqa: BLE001
             warnings.append(f"{sym} data failed: {e}")
+    daily_c = {}
+    for sym in list(h1):
+        try:
+            daily_c[sym] = data.crypto_daily(sym, days=400)
+        except Exception as e:  # noqa: BLE001
+            warnings.append(f"{sym} daily data failed: {e}")
     clock = data.us_market_clock(now)
     daily, intraday = {}, {}
     for sym in config.INDEX_ETFS:
@@ -116,10 +122,13 @@ def main():
 
     # ------------------------------- 2) signals on newly closed bars
     strategies = all_strategies()
-    btc_up = None
+    btc_up, btc_up_d = None, None
     if "BTC-USD" in h1:
         b4 = strategies["trend"].prepare(data.closed_bars(h1["BTC-USD"], "1h", now))
         btc_up = bool(b4.uptrend.iloc[-1]) if len(b4) else None
+    if "BTC-USD" in daily_c:
+        bd = strategies["trend_daily"].prepare(data.closed_bars(daily_c["BTC-USD"], "1D", now))
+        btc_up_d = bool(bd.uptrend.iloc[-1]) if len(bd) else None
 
     for name, strat in strategies.items():
         allowed = (enabled or config.DEFAULT_ENABLED).get(name, False) and enabled is not None
@@ -128,7 +137,12 @@ def main():
                 continue
             key = f"{name}:{sym}"
             if strat.asset == "crypto":
-                d = strat.prepare(data.closed_bars(h1[sym], "1h", now))
+                if strat.bar == "1D":
+                    if sym not in daily_c:
+                        continue
+                    d = strat.prepare(data.closed_bars(daily_c[sym], "1D", now))
+                else:
+                    d = strat.prepare(data.closed_bars(h1[sym], "1h", now))
                 if d.empty:
                     continue
                 bar_id = str(d.index[-1])
@@ -159,7 +173,9 @@ def main():
                     log(f"TRAIL {key} stop {pos['stop']:.4f} -> {new_stop:.4f}", now)
                     pos["stop"] = new_stop
                 continue
-            ctx = {"btc_uptrend": btc_up} if (name == "trend" and sym != "BTC-USD") else {}
+            ctx = {}
+            if name.startswith("trend") and sym != "BTC-USD":
+                ctx = {"btc_uptrend": btc_up_d if name == "trend_daily" else btc_up}
             stop = strat.entry(r, ctx)
             if stop is None or stop >= px:
                 continue

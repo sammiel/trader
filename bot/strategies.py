@@ -20,11 +20,16 @@ class Trend:
     an ATR chandelier trail; cuts losers at 2.5 ATR."""
     name, asset, bar = "trend", "crypto", "4h"
 
-    def __init__(self, p=None):
+    def __init__(self, p=None, name=None):
         self.p = p or config.TREND
+        self.bar = self.p["timeframe"]
+        if name:
+            self.name = name
 
-    def prepare(self, h1: pd.DataFrame) -> pd.DataFrame:
-        p, d = self.p, resample(h1, "4h")
+    def prepare(self, bars: pd.DataFrame) -> pd.DataFrame:
+        p = self.p
+        step = bars.index.to_series().diff().median() if len(bars) > 2 else pd.Timedelta(0)
+        d = bars.copy() if step >= pd.Timedelta(self.bar) else resample(bars, self.bar)
         d["ema_fast"] = ema(d["close"], p["ema_fast"])
         d["ema_slow"] = ema(d["close"], p["ema_slow"])
         d["dc_high"] = d["high"].rolling(p["breakout"]).max().shift(1)
@@ -114,4 +119,5 @@ class IndexPullback:
 
 
 def all_strategies():
-    return {s.name: s for s in (Trend(), Bounce(), IndexPullback())}
+    return {s.name: s for s in (Trend(), Trend(config.TREND_DAILY, name="trend_daily"),
+                                Bounce(), IndexPullback())}

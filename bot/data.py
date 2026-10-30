@@ -72,6 +72,23 @@ def crypto_hourly(product: str, hours: int = 1000, end: pd.Timestamp | None = No
         return _kraken_hourly(product)
 
 
+def crypto_daily(product: str, days: int = 400) -> pd.DataFrame:
+    """Daily bars (UTC days), last row may be today's forming bar."""
+    end = now_utc()
+    rows, cur_end, start = [], end, end - pd.Timedelta(days=days)
+    while cur_end > start:
+        cur_start = max(start, cur_end - pd.Timedelta(days=300))
+        r = _get(f"https://api.exchange.coinbase.com/products/{product}/candles",
+                 {"granularity": 86400, "start": cur_start.isoformat(),
+                  "end": cur_end.isoformat()})
+        rows += r.json()
+        cur_end = cur_start
+        time.sleep(0.15)
+    df = pd.DataFrame(rows, columns=["time", "low", "high", "open", "close", "volume"])
+    df["time"] = pd.to_datetime(df["time"], unit="s", utc=True)
+    return df.drop_duplicates("time").set_index("time").sort_index()[COLS].astype(float)
+
+
 def closed_bars(df: pd.DataFrame, bar: str, now: pd.Timestamp) -> pd.DataFrame:
     return df[df.index + pd.Timedelta(bar) <= now]
 
