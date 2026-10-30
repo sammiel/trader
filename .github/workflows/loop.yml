@@ -42,7 +42,7 @@ jobs:
                 sleep $((i*5))
               done
             fi
-            if grep -q '"test window over' state/events.log 2>/dev/null && [ "$(date -u +%Y%m%d%H%M)" -gt 202611062130 ]; then exit 0; fi
+            if [ "$(date -u +%Y%m%d%H%M)" -gt 202611062130 ]; then exit 0; fi
             sleep $(( 900 - $(date +%s) % 900 + 20 ))
           done
       - name: Start the next loop
