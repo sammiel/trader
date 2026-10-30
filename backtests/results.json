@@ -85,6 +85,84 @@
         "out-of-sample profit factor 0.86 < 1.0"
       ]
     },
+    "trend_daily": {
+      "all": {
+        "trades": 75,
+        "win_rate": 37.3,
+        "profit_factor": 1.29,
+        "net_pnl": 796.27,
+        "avg_r": 0.151,
+        "avg_hold_hours": 360.6
+      },
+      "in_sample": {
+        "trades": 51,
+        "win_rate": 37.3,
+        "profit_factor": 1.68,
+        "net_pnl": 1187.64,
+        "avg_r": 0.31,
+        "avg_hold_hours": 372.2
+      },
+      "out_of_sample": {
+        "trades": 24,
+        "win_rate": 37.5,
+        "profit_factor": 0.6,
+        "net_pnl": -391.37,
+        "avg_r": -0.188,
+        "avg_hold_hours": 336.0
+      },
+      "by_year": {
+        "2023": {
+          "trades": 12,
+          "win_rate": 41.7,
+          "profit_factor": 2.66,
+          "net_pnl": 759.47,
+          "avg_r": 0.85,
+          "avg_hold_hours": 450.0
+        },
+        "2024": {
+          "trades": 39,
+          "win_rate": 35.9,
+          "profit_factor": 1.33,
+          "net_pnl": 428.17,
+          "avg_r": 0.144,
+          "avg_hold_hours": 348.3
+        },
+        "2025": {
+          "trades": 20,
+          "win_rate": 45.0,
+          "profit_factor": 0.75,
+          "net_pnl": -196.43,
+          "avg_r": -0.108,
+          "avg_hold_hours": 331.2
+        },
+        "2026": {
+          "trades": 4,
+          "win_rate": 0.0,
+          "profit_factor": 0.0,
+          "net_pnl": -194.94,
+          "avg_r": -0.592,
+          "avg_hold_hours": 360.0
+        }
+      },
+      "equity": {
+        "start": "2022-11-02",
+        "end": "2026-10-30",
+        "net_return_pct": 7.96,
+        "cagr_pct": 1.94,
+        "max_drawdown_pct": -8.22
+      },
+      "at_0.4pct_fee": {
+        "start": "2022-11-02",
+        "end": "2026-10-30",
+        "net_return_pct": 4.79,
+        "cagr_pct": 1.18,
+        "max_drawdown_pct": -9.82
+      },
+      "passes_kill_gate": false,
+      "fail_reasons": [
+        "out-of-sample profit factor 0.6 < 1.0"
+      ]
+    },
     "bounce": {
       "all": {
         "trades": 367,
@@ -298,7 +376,7 @@
           "trades": 29,
           "win_rate": 75.9,
           "profit_factor": 1.47,
-          "net_pnl": 171.88,
+          "net_pnl": 171.89,
           "avg_r": 0.038,
           "avg_hold_hours": 133.2
         },
@@ -306,7 +384,7 @@
           "trades": 24,
           "win_rate": 66.7,
           "profit_factor": 0.91,
-          "net_pnl": -39.63,
+          "net_pnl": -39.62,
           "avg_r": -0.009,
           "avg_hold_hours": 133.0
         },
@@ -330,7 +408,7 @@
           "trades": 20,
           "win_rate": 55.0,
           "profit_factor": 0.84,
-          "net_pnl": -97.74,
+          "net_pnl": -97.72,
           "avg_r": -0.025,
           "avg_hold_hours": 130.8
         },
@@ -346,15 +424,15 @@
           "trades": 34,
           "win_rate": 67.6,
           "profit_factor": 2.55,
-          "net_pnl": 394.73,
+          "net_pnl": 394.74,
           "avg_r": 0.069,
           "avg_hold_hours": 144.7
         },
         "2013": {
           "trades": 24,
           "win_rate": 91.7,
-          "profit_factor": 23.47,
-          "net_pnl": 506.98,
+          "profit_factor": 23.48,
+          "net_pnl": 506.97,
           "avg_r": 0.119,
           "avg_hold_hours": 104.0
         },
@@ -362,7 +440,7 @@
           "trades": 26,
           "win_rate": 53.8,
           "profit_factor": 2.31,
-          "net_pnl": 203.2,
+          "net_pnl": 203.18,
           "avg_r": 0.043,
           "avg_hold_hours": 128.3
         },
@@ -370,7 +448,7 @@
           "trades": 32,
           "win_rate": 78.1,
           "profit_factor": 1.64,
-          "net_pnl": 236.34,
+          "net_pnl": 236.33,
           "avg_r": 0.04,
           "avg_hold_hours": 109.5
         },
@@ -378,7 +456,7 @@
           "trades": 18,
           "win_rate": 72.2,
           "profit_factor": 1.06,
-          "net_pnl": 12.67,
+          "net_pnl": 12.66,
           "avg_r": 0.004,
           "avg_hold_hours": 172.0
         },
@@ -386,7 +464,7 @@
           "trades": 27,
           "win_rate": 77.8,
           "profit_factor": 10.85,
-          "net_pnl": 435.49,
+          "net_pnl": 435.48,
           "avg_r": 0.084,
           "avg_hold_hours": 108.4
         },
@@ -402,7 +480,7 @@
           "trades": 16,
           "win_rate": 50.0,
           "profit_factor": 0.88,
-          "net_pnl": -28.65,
+          "net_pnl": -28.64,
           "avg_r": -0.009,
           "avg_hold_hours": 138.0
         },
@@ -410,7 +488,7 @@
           "trades": 20,
           "win_rate": 65.0,
           "profit_factor": 0.66,
-          "net_pnl": -257.66,
+          "net_pnl": -257.65,
           "avg_r": -0.064,
           "avg_hold_hours": 110.4
         },
@@ -458,15 +536,15 @@
           "trades": 33,
           "win_rate": 75.8,
           "profit_factor": 8.37,
-          "net_pnl": 785.3,
+          "net_pnl": 785.29,
           "avg_r": 0.115,
           "avg_hold_hours": 106.2
         }
       },
       "equity": {
         "start": "2005-01-04",
-        "end": "2026-10-30",
-        "net_return_pct": 33.94,
+        "end": "2026-10-31",
+        "net_return_pct": 33.93,
         "cagr_pct": 1.35,
         "max_drawdown_pct": -10.68
       },
@@ -481,8 +559,8 @@
       "max_drawdown_pct": -67.26
     },
     "index_equal_weight": {
-      "net_return_pct": 1124.21,
-      "oos_return_pct": 163.54,
+      "net_return_pct": 1098.69,
+      "oos_return_pct": 158.82,
       "max_drawdown_pct": -55.04
     }
   }
