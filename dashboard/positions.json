@@ -4,11 +4,11 @@
   "strategy": "core",
   "symbol": "BTC-USD",
   "entry": 77267.494584,
-  "price": 76950.0,
+  "price": 76649.98,
   "stop": 0.0,
-  "value": 994.7,
-  "unrealized": -4.1,
-  "ret_pct": -0.41,
+  "value": 990.82,
+  "unrealized": -7.98,
+  "ret_pct": -0.8,
   "since": "2026-10-30 13:23:43.022220+00:00"
  },
  {
@@ -16,10 +16,10 @@
   "strategy": "core",
   "symbol": "SPY",
   "entry": 769.5907933472,
-  "price": 760.5800170898,
+  "price": 760.5700073242,
   "stop": 0.0,
-  "value": 986.61,
-  "unrealized": -11.69,
+  "value": 986.6,
+  "unrealized": -11.7,
   "ret_pct": -1.17,
   "since": "2026-10-30 13:23:43.022220+00:00"
  }

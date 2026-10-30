@@ -36,11 +36,10 @@
   <section class="tiles" id="kpis">
     <div class="card tile"><div class="label">Equity</div><b class="big" data-draw="k-equity" data-source="kpi" data-field="equity" data-row="0">—</b><div class="sub">Started at $10,000</div></div>
     <div class="card tile"><div class="label">Return since 30 Oct</div><b class="big" data-draw="k-ret" data-source="kpi" data-field="return_pct" data-row="0">—</b><div class="sub">After fees and slippage</div></div>
-    <div class="card tile"><div class="label">Realized P&amp;L</div><b class="big" data-draw="k-real" data-source="kpi" data-field="realized_pnl" data-row="0">—</b><div class="sub">Open positions: <span data-draw="k-unreal" data-source="kpi" data-field="unrealized_pnl" data-row="0">—</span> unrealized</div></div>
+    <div class="card tile"><div class="label">Berkshire mode (capital floor)</div><b class="big" data-draw="k-bk" data-source="kpi" data-field="berkshire_return_pct" data-row="0">—</b><div class="sub">Cushion above floor <span data-draw="k-bk-cushion" data-source="kpi" data-field="berkshire_cushion" data-row="0">—</span></div></div>
     <div class="card tile"><div class="label">Closed trades</div><b class="big" data-draw="k-trades" data-source="kpi" data-field="closed_trades" data-row="0">—</b><div class="sub">Win rate <span data-draw="k-win" data-source="kpi" data-field="win_rate_pct" data-row="0">—</span></div></div>
     <div class="card tile"><div class="label">Max drawdown</div><b class="big" data-draw="k-dd" data-source="kpi" data-field="max_drawdown_pct" data-row="0">—</b><div class="sub">Breaker stops new trades at −10%</div></div>
     <div class="card tile"><div class="label">Shadow book (all strategies)</div><b class="big" data-draw="k-shadow" data-source="kpi" data-field="shadow_return_pct" data-row="0">—</b><div class="sub">Gated-out strategies, own $10,000</div></div>
-    <div class="card tile"><div class="label">Berkshire mode (capital floor)</div><b class="big" data-draw="k-bk" data-source="kpi" data-field="berkshire_return_pct" data-row="0">—</b><div class="sub">Cushion above floor <span data-draw="k-bk-cushion" data-source="kpi" data-field="berkshire_cushion" data-row="0">—</span></div></div>
     <div class="card tile"><div class="label">Bot status</div><b class="big" data-draw="k-health" data-source="kpi" data-field="bot_healthy" data-row="0">—</b><div class="sub">Last run <span data-draw="k-tick" data-source="kpi" data-field="last_tick" data-row="0">—</span> UTC</div></div>
   </section>
 
@@ -123,8 +122,6 @@
   dash.draw('lead-upd', kpiField('updated', (v) => String(v).replace('T', ' ').replace('Z', '')));
   dash.draw('k-equity', kpiField('equity', money));
   dash.draw('k-ret', kpiField('return_pct', pct, true));
-  dash.draw('k-real', kpiField('realized_pnl', signedMoney, true));
-  dash.draw('k-unreal', kpiField('unrealized_pnl', signedMoney, true));
   dash.draw('k-trades', kpiField('closed_trades', (v) => d3.format(',')(+v)));
   dash.draw('k-win', kpiField('win_rate_pct', (v) => d3.format('.1f')(+v) + '%'));
   dash.draw('k-shadow', kpiField('shadow_return_pct', pct, true));

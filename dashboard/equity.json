@@ -1,9 +1,10 @@
 [
  {
   "time": "2026-10-30T13:00:00Z",
-  "equity": 9983.21,
+  "equity": 9979.32,
   "btc_hold": 10000.0,
   "spy_hold": 10000.0,
-  "shadow_equity": 10000.0
+  "shadow_equity": 10000.0,
+  "berkshire_equity": 10000.0
  }
 ]

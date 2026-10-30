@@ -1,19 +1,25 @@
 [
  {
-  "updated": "2026-10-30T13:41Z",
-  "equity": 9983.21,
-  "return_pct": -0.17,
-  "max_drawdown_pct": -0.15,
+  "updated": "2026-10-30T13:49Z",
+  "equity": 9979.32,
+  "return_pct": -0.21,
+  "max_drawdown_pct": -0.19,
   "realized_pnl": 0.0,
-  "unrealized_pnl": -15.79,
+  "unrealized_pnl": -19.68,
   "closed_trades": 0,
   "win_rate_pct": null,
   "open_positions": 2,
-  "btc_hold_pct": -0.33,
+  "btc_hold_pct": -0.72,
   "spy_hold_pct": -1.14,
   "bot_healthy": true,
-  "last_tick": "2026-10-30 13:42",
+  "last_tick": "2026-10-30 13:49",
   "shadow_equity": 10000.0,
-  "shadow_return_pct": 0.0
+  "shadow_return_pct": 0.0,
+  "berkshire_equity": 10000.0,
+  "berkshire_return_pct": 0.0,
+  "berkshire_floor": 10000.0,
+  "berkshire_cushion": 0.0,
+  "berkshire_interest": 0.0,
+  "berkshire_trades": 0
  }
 ]
