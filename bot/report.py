@@ -94,6 +94,27 @@ def write_summary(st, prices, now):
                                      "stop": p["stop"], "price": prices.get(p["symbol"])}
                                     for p in bk["positions"].values()]}
 
+    # 15-minute curves for the live page: all books + $10k held in BTC / SPY
+    curves = []
+    if not eq.empty:
+        c = eq.copy()
+        c["time"] = pd.to_datetime(c["time"])
+        c = c.set_index("time").resample("15min").last().dropna(subset=["equity"])
+        for name, path in (("shadow", "state/shadow_equity.csv"), ("berkshire", "state/berkshire_equity.csv")):
+            o = _read_csv(path)
+            if len(o):
+                o["time"] = pd.to_datetime(o["time"])
+                c[name] = o.set_index("time")["equity"].resample("15min").last().reindex(c.index).ffill()
+            else:
+                c[name] = None
+        b0, s0 = c["btc"].dropna().iloc[0], c["spy"].dropna().iloc[0]
+        c["btc_hold"] = config.STARTING_CASH * c["btc"] / b0
+        c["spy_hold"] = config.STARTING_CASH * c["spy"] / s0
+        for t, r in c.iterrows():
+            curves.append({"t": t.strftime("%Y-%m-%dT%H:%MZ"),
+                           **{k: (None if pd.isna(r.get(k)) else round(float(r[k]), 2))
+                              for k in ("equity", "berkshire", "shadow", "btc_hold", "spy_hold")}})
+
     summary = {
         "updated": str(now), "started": st.get("started"),
         "starting_cash": config.STARTING_CASH, "equity": round(equity, 2),
@@ -105,7 +126,7 @@ def write_summary(st, prices, now):
         "recent_signals": sigs.tail(25).to_dict("records") if not sigs.empty else [],
         "enabled": json.load(open("state/enabled.json")) if os.path.exists("state/enabled.json") else None,
         "warnings": st.get("warnings", []), "equity_curve": curve, "prices": prices,
-        "shadow": shadow, "berkshire": berkshire, "active_mode": config.ACTIVE_MODE,
+        "shadow": shadow, "berkshire": berkshire, "curves": curves, "active_mode": config.ACTIVE_MODE,
     }
     with open("docs/summary.json", "w") as f:
         json.dump(summary, f, indent=2, default=str)
