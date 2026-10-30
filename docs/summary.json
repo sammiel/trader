@@ -1,21 +1,21 @@
 {
-  "updated": "2026-10-30 14:20:30.741435+00:00",
+  "updated": "2026-10-30 14:22:09.314697+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 9977.63,
+  "equity": 9977.42,
   "cash": 8001.9,
-  "return_pct": -0.22,
+  "return_pct": -0.23,
   "max_drawdown_pct": -0.2,
   "benchmark_return_pct": {
-    "BTC-USD": -0.6,
-    "SPY": -1.43
+    "BTC-USD": -0.56,
+    "SPY": -1.49
   },
   "by_strategy": {
     "core": {
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -21.37
+      "unrealized": -21.58
     }
   },
   "open_positions": [
@@ -23,22 +23,22 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 76742.02,
+      "price": 76771.4,
       "stop": 0.0,
-      "value": 992.01,
-      "unrealized": -6.79,
-      "ret_pct": -0.68,
+      "value": 992.39,
+      "unrealized": -6.41,
+      "ret_pct": -0.64,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "core",
       "symbol": "SPY",
       "entry": 769.590793347168,
-      "price": 758.3499755859375,
+      "price": 757.9000244140625,
       "stop": 0.0,
-      "value": 983.72,
-      "unrealized": -14.58,
-      "ret_pct": -1.46,
+      "value": 983.14,
+      "unrealized": -15.17,
+      "ret_pct": -1.52,
       "since": "2026-10-30 13:23:43.022220+00:00"
     }
   ],
@@ -59,19 +59,19 @@
     ],
     [
       "2026-10-30 14:00:00",
-      9977.63
+      9977.42
     ]
   ],
   "prices": {
-    "BTC-USD": 76742.02,
-    "ETH-USD": 2219.76,
-    "SOL-USD": 94.76,
-    "XRP-USD": 1.2328,
-    "LINK-USD": 10.937,
-    "AVAX-USD": 8.214,
-    "SPY": 758.3499755859375,
-    "QQQ": 694.3699951171875,
-    "IWM": 280.44000244140625
+    "BTC-USD": 76771.4,
+    "ETH-USD": 2220.07,
+    "SOL-USD": 94.68,
+    "XRP-USD": 1.2321,
+    "LINK-USD": 10.931,
+    "AVAX-USD": 8.218,
+    "SPY": 757.9000244140625,
+    "QQQ": 693.7399291992188,
+    "IWM": 280.1499938964844
   },
   "shadow": {
     "equity": 10000.0,
