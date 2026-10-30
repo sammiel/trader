@@ -1,0 +1,3 @@
+time,strategy,symbol,price,stop,bar,action
+2026-10-30 19:30:21.509312+00:00,index_pullback,SPY,750.969970703125,690.892373,2026-10-30,opened
+2026-10-30 19:30:21.509312+00:00,index_pullback,QQQ,687.1400146484375,632.168813,2026-10-30,opened

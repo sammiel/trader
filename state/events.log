@@ -1,2 +1,8 @@
 2026-10-30 13:23Z  CORE BUY BTC-USD qty=0.012927 @ 77267.49
 2026-10-30 13:23Z  CORE BUY SPY qty=1.297187 @ 769.59
+2026-10-30 19:30Z  BUY index_pullback:SPY qty=2.652593 @ 751.1953 stop 690.8924 ($1993)
+2026-10-30 19:30Z  BUY index_pullback:QQQ qty=2.898824 @ 687.3462 stop 632.1688 ($1992)
+2026-10-30 19:30Z  [shadow] BUY index_pullback:SPY qty=2.662424 @ 751.1953 stop 690.8924 ($2000)
+2026-10-30 19:30Z  [shadow] BUY index_pullback:QQQ qty=2.909567 @ 687.3462 stop 632.1688 ($2000)
+2026-10-30 19:30Z  [berkshire] SIGNAL index_pullback:SPY skipped (no_cushion)
+2026-10-30 19:30Z  [berkshire] SIGNAL index_pullback:QQQ skipped (no_cushion)
