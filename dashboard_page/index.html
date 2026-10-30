@@ -1,0 +1,252 @@
+<meta name="dash-one-writer">
+<style>
+  .pt { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+  .pt h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+  .pt h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+  .pt .lead { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); }
+  .pt .lead b { color: var(--color-fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pt .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: var(--cds-gap-md); }
+  .pt .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .pt .tile .label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .pt .tile .big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin-top: var(--cds-gap-xs); display: block; }
+  .pt .tile .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-xs); font-variant-numeric: tabular-nums; }
+  .pt .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-md); }
+  .pt .pos { color: var(--color-ok); } .pt .neg { color: var(--color-bad); }
+  .pt .chart { position: relative; min-height: 300px; }
+  .pt .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+  .pt .tip .t { color: var(--cds-text-secondary); }
+  .pt .tip .sw { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+  .pt .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr)); gap: var(--cds-gap-md); }
+  .pt .tbl { overflow: auto; max-height: 26rem; }
+  .pt table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .pt th { text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); position: sticky; top: 0; background: var(--color-panel); white-space: nowrap; }
+  .pt td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .pt td.num, .pt th.num { text-align: right; }
+  .pt .empty-msg { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .pt [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  .pt [data-dash-source-state=empty] { color: transparent; }
+</style>
+
+<div class="pt">
+  <header>
+    <h1>Paper trading: 30 Oct – 6 Nov 2026</h1>
+    <p class="lead">Simulated $10,000 accounts, no real money. Since the start, normal mode is <b data-draw="lead-ret" data-source="kpi" data-field="return_pct" data-row="0">—</b>; holding only BTC would be <b data-draw="lead-btc" data-source="kpi" data-field="btc_hold_pct" data-row="0">—</b> and only SPY <b data-draw="lead-spy" data-source="kpi" data-field="spy_hold_pct" data-row="0">—</b>. Last update <b data-draw="lead-upd" data-source="kpi" data-field="updated" data-row="0">—</b> UTC.</p>
+  </header>
+
+  <section class="tiles" id="kpis">
+    <div class="card tile"><div class="label">Equity</div><b class="big" data-draw="k-equity" data-source="kpi" data-field="equity" data-row="0">—</b><div class="sub">Started at $10,000</div></div>
+    <div class="card tile"><div class="label">Return since 30 Oct</div><b class="big" data-draw="k-ret" data-source="kpi" data-field="return_pct" data-row="0">—</b><div class="sub">After fees and slippage</div></div>
+    <div class="card tile"><div class="label">Realized P&amp;L</div><b class="big" data-draw="k-real" data-source="kpi" data-field="realized_pnl" data-row="0">—</b><div class="sub">Open positions: <span data-draw="k-unreal" data-source="kpi" data-field="unrealized_pnl" data-row="0">—</span> unrealized</div></div>
+    <div class="card tile"><div class="label">Closed trades</div><b class="big" data-draw="k-trades" data-source="kpi" data-field="closed_trades" data-row="0">—</b><div class="sub">Win rate <span data-draw="k-win" data-source="kpi" data-field="win_rate_pct" data-row="0">—</span></div></div>
+    <div class="card tile"><div class="label">Max drawdown</div><b class="big" data-draw="k-dd" data-source="kpi" data-field="max_drawdown_pct" data-row="0">—</b><div class="sub">Breaker stops new trades at −10%</div></div>
+    <div class="card tile"><div class="label">Shadow book (all strategies)</div><b class="big" data-draw="k-shadow" data-source="kpi" data-field="shadow_return_pct" data-row="0">—</b><div class="sub">Gated-out strategies, own $10,000</div></div>
+    <div class="card tile"><div class="label">Berkshire mode (capital floor)</div><b class="big" data-draw="k-bk" data-source="kpi" data-field="berkshire_return_pct" data-row="0">—</b><div class="sub">Cushion above floor <span data-draw="k-bk-cushion" data-source="kpi" data-field="berkshire_cushion" data-row="0">—</span></div></div>
+    <div class="card tile"><div class="label">Bot status</div><b class="big" data-draw="k-health" data-source="kpi" data-field="bot_healthy" data-row="0">—</b><div class="sub">Last run <span data-draw="k-tick" data-source="kpi" data-field="last_tick" data-row="0">—</span> UTC</div></div>
+  </section>
+
+  <section class="card" id="equity">
+    <h2>Normal mode, Berkshire mode and shadow book vs. just holding BTC or SPY</h2>
+    <p class="note">Hourly. Every line starts from $10,000. Normal mode is the main account. Berkshire mode keeps the $10,000 as a floor and risks only what it has earned above it. The shadow book trades every strategy, including the ones the backtest switched off.</p>
+    <div class="chart" data-draw="equity-chart" data-source="equity"></div>
+  </section>
+
+  <section class="card" id="strategies">
+    <h2>Strategies: this week vs. backtest</h2>
+    <p class="note">Only strategies that passed the backtest kill gate trade. The others log their signals without trading. Backtest: crypto Nov 2022 – Oct 2026, ETFs 2005 – Oct 2026, after costs. OOS = out-of-sample (crypto 2025 onward, ETFs 2020 onward).</p>
+    <div class="tbl">
+      <table data-source="strategies" data-row-key="strategy">
+        <thead><tr>
+          <th data-field="strategy">Strategy</th><th data-field="status">Status</th>
+          <th class="num" data-field="live_trades">Trades this week</th><th class="num" data-field="live_realized">Realized $</th><th class="num" data-field="live_unrealized">Unrealized $</th>
+          <th class="num" data-field="shadow_trades">Shadow trades</th><th class="num" data-field="shadow_pnl">Shadow P&amp;L $</th>
+          <th class="num" data-field="bt_trades">Backtest trades</th><th class="num" data-field="bt_win_rate">Win %</th><th class="num" data-field="bt_profit_factor">Profit factor</th><th class="num" data-field="bt_oos_pf">OOS profit factor</th><th class="num" data-field="bt_cagr_pct">CAGR %</th><th class="num" data-field="bt_max_dd_pct">Max DD %</th><th class="num" data-field="bt_return_at_0_4pct_fee">Return at 0.4% fee %</th>
+        </tr></thead>
+        <tbody data-draw="strat-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section class="card" id="positions">
+      <h2>Open positions</h2>
+      <p class="note">Stops are checked every 15 minutes against the hourly lows.</p>
+      <div class="tbl">
+        <table data-source="positions" data-row-key="position">
+          <thead><tr><th data-field="position">Position</th><th class="num" data-field="entry">Entry</th><th class="num" data-field="price">Price</th><th class="num" data-field="stop">Stop</th><th class="num" data-field="value">Value $</th><th class="num" data-field="unrealized">P&amp;L $</th><th class="num" data-field="ret_pct">P&amp;L %</th></tr></thead>
+          <tbody data-draw="pos-rows"></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="card" id="trades">
+      <h2>Closed trades</h2>
+      <p class="note">Newest first. R = profit or loss as a multiple of the amount risked.</p>
+      <div class="tbl">
+        <table data-source="trades" data-row-key="trade">
+          <thead><tr><th data-field="trade">Trade</th><th class="num" data-field="entry">Entry</th><th class="num" data-field="exit">Exit</th><th class="num" data-field="pnl">P&amp;L $</th><th class="num" data-field="r_multiple">R</th><th data-field="reason">Exit reason</th></tr></thead>
+          <tbody data-draw="trade-rows"></tbody>
+        </table>
+      </div>
+      <p class="empty-msg trades-empty" hidden>No closed trades yet.</p>
+    </section>
+  </div>
+
+  <section class="card" id="signals">
+    <h2>Signals</h2>
+    <p class="note">Every entry signal, including those skipped because the strategy failed its backtest or a risk limit was hit. Newest first.</p>
+    <div class="tbl">
+      <table data-source="signals" data-row-key="signal">
+        <thead><tr><th data-field="signal">Signal</th><th class="num" data-field="price">Price</th><th class="num" data-field="stop">Stop</th><th data-field="action">Action</th></tr></thead>
+        <tbody data-draw="sig-rows"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+  const money = (v) => v == null || v === '' ? '—' : '$' + d3.format(',.2f')(+v);
+  const signedMoney = (v) => v == null || v === '' ? '—' : (+v >= 0 ? '+' : '−') + '$' + d3.format(',.2f')(Math.abs(+v));
+  const pct = (v) => v == null || v === '' ? '—' : (+v >= 0 ? '+' : '−') + d3.format('.2f')(Math.abs(+v)) + '%';
+  const num = (v, f = ',.2f') => v == null || v === '' ? '—' : d3.format(f)(+v);
+  const price = (v) => { if (v == null || v === '') return '—'; const x = +v; return d3.format(x >= 100 ? ',.2f' : x >= 1 ? ',.3f' : ',.5f')(x); };
+  const tone = (el, v) => { el.classList.toggle('pos', +v > 0); el.classList.toggle('neg', +v < 0); };
+  window.ptFmt = { money, signedMoney, pct, num, price, tone };
+
+  const kpiField = (field, fmt, colored) => (el) => {
+    const k = dash.data('kpi');
+    const row = k.status === 'ok' && k.data.length ? k.data[0] : null;
+    el.textContent = row && row[field] != null ? fmt(row[field]) : '—';
+    if (colored) tone(el, row ? row[field] : 0);
+  };
+  dash.draw('lead-ret', kpiField('return_pct', pct, true));
+  dash.draw('lead-btc', kpiField('btc_hold_pct', pct, true));
+  dash.draw('lead-spy', kpiField('spy_hold_pct', pct, true));
+  dash.draw('lead-upd', kpiField('updated', (v) => String(v).replace('T', ' ').replace('Z', '')));
+  dash.draw('k-equity', kpiField('equity', money));
+  dash.draw('k-ret', kpiField('return_pct', pct, true));
+  dash.draw('k-real', kpiField('realized_pnl', signedMoney, true));
+  dash.draw('k-unreal', kpiField('unrealized_pnl', signedMoney, true));
+  dash.draw('k-trades', kpiField('closed_trades', (v) => d3.format(',')(+v)));
+  dash.draw('k-win', kpiField('win_rate_pct', (v) => d3.format('.1f')(+v) + '%'));
+  dash.draw('k-shadow', kpiField('shadow_return_pct', pct, true));
+  dash.draw('k-bk', kpiField('berkshire_return_pct', (v) => (+v >= 0 ? '+' : '−') + d3.format('.3f')(Math.abs(+v)) + '%', true));
+  dash.draw('k-bk-cushion', kpiField('berkshire_cushion', money));
+  dash.draw('k-dd', kpiField('max_drawdown_pct', (v) => d3.format('.2f')(+v) + '%'));
+  dash.draw('k-health', (el) => {
+    const k = dash.data('kpi');
+    const row = k.status === 'ok' && k.data.length ? k.data[0] : null;
+    el.textContent = row ? (row.bot_healthy ? 'Running' : 'Error') : '—';
+    el.classList.toggle('neg', !!row && !row.bot_healthy);
+  });
+  dash.draw('k-tick', kpiField('last_tick', (v) => String(v).replace('T', ' ')));
+</script>
+
+<script>
+  dash.draw('equity-chart', (el) => {
+    const ds = dash.data('equity');
+    el.replaceChildren();
+    if (ds.status !== 'ok' || !ds.data.length) return;
+    const series = [
+      { key: 'equity', name: 'Normal mode', color: dash.colors[0], w: 2.5 },
+      { key: 'berkshire_equity', name: 'Berkshire mode', color: dash.colors[4], w: 2 },
+      { key: 'btc_hold', name: 'Hold BTC', color: dash.colors[1], w: 1.5 },
+      { key: 'spy_hold', name: 'Hold SPY', color: dash.colors[2], w: 1.5 },
+      { key: 'shadow_equity', name: 'Shadow book', color: dash.colors[3], w: 1.5 },
+    ];
+    const toNum = (v) => (v == null || v === '' ? NaN : +v);
+    const rows = ds.data.map((r) => ({ t: new Date(r.time), equity: toNum(r.equity), btc_hold: toNum(r.btc_hold), spy_hold: toNum(r.spy_hold), shadow_equity: toNum(r.shadow_equity), berkshire_equity: toNum(r.berkshire_equity) }));
+    const W = Math.max(280, el.clientWidth), H = 300;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const all = rows.flatMap((r) => series.map((s) => r[s.key])).filter(Number.isFinite);
+    const START = 10000; const lo = Math.min(d3.min(all), START), hi = Math.max(d3.max(all), START), pad = Math.max((hi - lo) * 0.1, 20);
+    const y = d3.scaleLinear([lo - pad, hi + pad], [H - 28, 10]).nice();
+    const probe = svg.append('text').attr('font-size', 12);
+    const lastOf = (k) => { for (let i = rows.length - 1; i >= 0; i--) if (Number.isFinite(rows[i][k])) return rows[i][k]; return NaN; };
+    const shown = series.filter((s) => Number.isFinite(lastOf(s.key)));
+    const labelW = d3.max(shown, (s) => { probe.text(`${s.name} $${d3.format(',.0f')(lastOf(s.key))}`); return probe.node().getComputedTextLength(); }) || 0;
+    probe.text(d3.format('$,.0f')(y.domain()[1]));
+    const tickW = probe.node().getComputedTextLength();
+    probe.remove();
+    const m = { l: tickW + 10, r: labelW + 14 };
+    const ext = d3.extent(rows, (r) => r.t);
+    if (+ext[0] === +ext[1]) ext[1] = new Date(+ext[0] + 3600e3);
+    const x = d3.scaleUtc(ext, [m.l, W - m.r]);
+    const gy = svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - m.l - m.r)).tickFormat(d3.format('$,.0f')));
+    gy.attr('font-size', null).attr('font-family', null).select('.domain').remove();
+    gy.selectAll('line').attr('stroke', 'var(--cds-chart-grid)');
+    gy.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)');
+    const gx = svg.append('g').attr('transform', `translate(0,${H - 28})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((W - m.l - m.r) / 110))).tickFormat(d3.utcFormat('%b %-d %H:%M')));
+    gx.attr('font-size', null).attr('font-family', null);
+    gx.select('.domain').attr('stroke', 'var(--cds-chart-axis)');
+    gx.selectAll('line').attr('stroke', 'var(--cds-chart-axis)');
+    gx.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)');
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(START)).attr('y2', y(START))
+      .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 4');
+    const line = (k) => d3.line().defined((r) => Number.isFinite(r[k])).x((r) => x(r.t)).y((r) => y(r[k]));
+    shown.slice().reverse().forEach((s) => {
+      svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', s.color)
+        .attr('stroke-width', s.w).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', line(s.key));
+      svg.append('circle').attr('cx', x(rows.at(-1).t)).attr('cy', y(lastOf(s.key))).attr('r', 2.5).attr('fill', s.color);
+    });
+    const ends = shown.map((s) => ({ s, y: y(lastOf(s.key)) })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
+    ends.forEach((e) => svg.append('text').attr('x', W - m.r + 6).attr('y', e.y).attr('dy', '0.32em')
+      .attr('fill', e.s.color).style('font-size', 'var(--cds-font-size-caption)')
+      .text(`${e.s.name} ${d3.format('$,.0f')(lastOf(e.s.key))}`));
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    const rule = svg.append('line').attr('y1', 10).attr('y2', H - 28).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
+    const dots = series.map((s) => svg.append('circle').attr('r', 3.5).attr('fill', s.color).style('display', 'none'));
+    const bis = d3.bisector((r) => r.t).center;
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [px] = d3.pointer(ev);
+        const r = rows[bis(rows, x.invert(px))];
+        const cx = x(r.t);
+        rule.attr('x1', cx).attr('x2', cx).style('display', null);
+        series.forEach((s, i) => dots[i].attr('cx', cx).attr('cy', y(r[s.key])).style('display', Number.isFinite(r[s.key]) ? null : 'none'));
+        tip.style('display', null).selectAll('*').remove();
+        tip.append('div').attr('class', 't').text(d3.utcFormat('%b %-d, %H:%M UTC')(r.t));
+        shown.forEach((s) => { if (!Number.isFinite(r[s.key])) return; const d = tip.append('div'); d.append('span').attr('class', 'sw').style('background', s.color); d.append('span').text(`${s.name}: ${d3.format('$,.2f')(r[s.key])}`); });
+        const tw = tip.node().offsetWidth, cw = el.clientWidth;
+        const left = Math.min(Math.max(0, cx / W * cw + 12), cw - tw);
+        tip.style('left', `${left}px`).style('top', '8px');
+      })
+      .on('pointerleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); dots.forEach((d) => d.style('display', 'none')); });
+  });
+</script>
+
+<script>
+  const F = window.ptFmt;
+  const fillRows = (tbody, id, cols) => {
+    const ds = dash.data(id);
+    tbody.replaceChildren();
+    if (ds.status !== 'ok') return;
+    ds.data.forEach((r) => {
+      const tr = document.createElement('tr');
+      cols.forEach(([field, fmt, cls, colored]) => {
+        const td = document.createElement('td');
+        td.textContent = fmt ? fmt(r[field]) : (r[field] ?? '—');
+        if (cls) td.className = cls;
+        if (colored) F.tone(td, r[field]);
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  };
+  const n1 = (v) => F.num(v, '.1f'), n2 = (v) => F.num(v, '.2f'), int = (v) => F.num(v, ',');
+  dash.draw('strat-rows', (tb) => fillRows(tb, 'strategies', [
+    ['strategy'], ['status'], ['live_trades', int, 'num'], ['live_realized', F.signedMoney, 'num', true], ['live_unrealized', F.signedMoney, 'num', true],
+    ['shadow_trades', int, 'num'], ['shadow_pnl', F.signedMoney, 'num', true],
+    ['bt_trades', int, 'num'], ['bt_win_rate', n1, 'num'], ['bt_profit_factor', n2, 'num'], ['bt_oos_pf', n2, 'num'],
+    ['bt_cagr_pct', n2, 'num', true], ['bt_max_dd_pct', n2, 'num'], ['bt_return_at_0_4pct_fee', n2, 'num', true]]));
+  dash.draw('pos-rows', (tb) => fillRows(tb, 'positions', [
+    ['position'], ['entry', F.price, 'num'], ['price', F.price, 'num'], ['stop', F.price, 'num'], ['value', F.money, 'num'],
+    ['unrealized', F.signedMoney, 'num', true], ['ret_pct', F.pct, 'num', true]]));
+  dash.draw('trade-rows', (tb) => fillRows(tb, 'trades', [
+    ['trade'], ['entry', F.price, 'num'], ['exit', F.price, 'num'], ['pnl', F.signedMoney, 'num', true], ['r_multiple', n2, 'num', true], ['reason']]));
+  dash.draw('sig-rows', (tb) => fillRows(tb, 'signals', [
+    ['signal'], ['price', F.price, 'num'], ['stop', F.price, 'num'], ['action']]));
+  dash.onData(() => {
+    const t = dash.data('trades');
+    document.querySelectorAll('.trades-empty').forEach((el) => { el.hidden = !(t.status === 'ok' && !t.data.length); });
+  });
+</script>
