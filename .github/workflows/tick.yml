@@ -1,5 +1,5 @@
 name: tick
-# Live paper-trading loop: every 15 minutes (GitHub may delay scheduled runs by a few minutes).
+# Live paper-trading loop: every 15 minutes (GitHub may delay or drop scheduled runs).
 on:
   schedule:
     - cron: "*/15 * * * *"
@@ -17,19 +17,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  tick:
+  guard:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    outputs:
+      skip: ${{ steps.g.outputs.skip }}
     steps:
-      - name: Skip if the loop engine is running
-        id: guard
+      - id: g
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           n=$(gh run list -R "$GITHUB_REPOSITORY" --workflow loop.yml --status in_progress --json databaseId --jq length 2>/dev/null || echo 0)
-          echo "skip=$([ "$n" -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "skip=$([ "${n:-0}" -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+  tick:
+    needs: guard
+    if: needs.guard.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
       - uses: actions/checkout@v4
-        if: steps.guard.outputs.skip != 'true'
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -46,7 +52,7 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -q -m "tick $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main && exit 0
             sleep $((i*5))
           done
           exit 1
