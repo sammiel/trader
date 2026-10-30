@@ -224,6 +224,30 @@ def main():
                                            "open_positions": len(sh.positions)})
     st.update({"shadow": sh.to_state(), "shadow_eval": sh_eval})
 
+    # Berkshire book: capital preservation mode on its own $10k (see config).
+    bk = Portfolio(state=st.get("berkshire"), mode="berkshire")
+    prev = pd.Timestamp(st.get("berkshire_last", str(now)))
+    bk.accrue_interest(max(0.0, (now - prev).total_seconds()) / (365.25 * 86400))
+    bk_eq = bk.equity(prices)
+    bk.roll_day(str(now.date()), bk_eq)
+    if bk.positions and bk_eq <= bk.floor():
+        for key, pos in list(bk.positions.items()):
+            t = bk.close(key, prices.get(pos["symbol"], pos["entry"]), now, "floor")
+            log(f"[berkshire] FLOOR EXIT {key} pnl {t['pnl']:+.2f}", now)
+            append_csv("state/berkshire_trades.csv", t)
+    bk_eval = st.get("berkshire_eval", {})
+    run_book(bk, bk_eval,
+             lambda n: n in config.BERKSHIRE["strategies"] and bool(enabled) and bool(enabled.get(n, False)),
+             "[berkshire] ", "state/berkshire_trades.csv", lambda sig: None, ctxdata)
+    bk_eq = bk.equity(prices)
+    bk.roll_day(str(now.date()), bk_eq)
+    append_csv("state/berkshire_equity.csv", {
+        "time": now.strftime("%Y-%m-%d %H:%M"), "equity": round(bk_eq, 2),
+        "floor": round(bk.floor(), 2), "cushion": round(bk.cushion(bk_eq), 2),
+        "interest": round(bk.interest, 2), "open_positions": len(bk.positions)})
+    st.update({"berkshire": bk.to_state(), "berkshire_eval": bk_eval,
+               "berkshire_last": str(now)})
+
     # ------------------------------------------------------- record
     equity = pf.equity(prices)
     pf.roll_day(str(now.date()), equity)

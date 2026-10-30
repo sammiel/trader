@@ -1,0 +1,19 @@
+[
+ {
+  "updated": "2026-10-30T13:41Z",
+  "equity": 9983.21,
+  "return_pct": -0.17,
+  "max_drawdown_pct": -0.15,
+  "realized_pnl": 0.0,
+  "unrealized_pnl": -15.79,
+  "closed_trades": 0,
+  "win_rate_pct": null,
+  "open_positions": 2,
+  "btc_hold_pct": -0.33,
+  "spy_hold_pct": -1.14,
+  "bot_healthy": true,
+  "last_tick": "2026-10-30 13:42",
+  "shadow_equity": 10000.0,
+  "shadow_return_pct": 0.0
+ }
+]

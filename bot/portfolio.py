@@ -11,8 +11,11 @@ def costs(symbol: str):
 
 class Portfolio:
     def __init__(self, cash=config.STARTING_CASH, state=None, fee_override=None,
-                 drawdown_breaker=True):
+                 drawdown_breaker=True, mode="normal"):
         s = state or {}
+        self.mode = mode
+        self.start_cash = s.get("start_cash", cash)
+        self.interest = s.get("interest", 0.0)
         self.cash = s.get("cash", cash)
         self.positions = s.get("positions", {})     # key -> dict
         self.trades = []                            # closed trades this session
@@ -38,7 +41,36 @@ class Portfolio:
 
     def to_state(self):
         return {"cash": self.cash, "positions": self.positions, "peak": self.peak,
-                "day": self.day, "day_start": self.day_start}
+                "day": self.day, "day_start": self.day_start,
+                "start_cash": self.start_cash, "interest": self.interest}
+
+    # ------------------------------------------------------ berkshire mode
+    def floor(self) -> float:
+        b = config.BERKSHIRE
+        return self.start_cash * b["floor_pct"] + b["lock_in"] * max(0.0, self.peak - self.start_cash)
+
+    def cushion(self, equity: float) -> float:
+        return equity - self.floor()
+
+    @staticmethod
+    def _gap(sym):
+        b = config.BERKSHIRE
+        return b["gap_crypto"] if sym.endswith("-USD") else b["gap_stock"]
+
+    def worst_case_loss(self, prices=None) -> float:
+        """Loss if every open position gapped its 'gap' beyond its stop at once."""
+        tot = 0.0
+        for p in self.positions.values():
+            px = (prices or {}).get(p["symbol"], p["entry"])
+            exit_px = max(p["stop"] * (1 - self._gap(p["symbol"])), 0.0)
+            tot += max(0.0, p["qty"] * (px - exit_px))
+        return tot
+
+    def accrue_interest(self, years: float):
+        if self.mode == "berkshire" and years > 0 and self.cash > 0:
+            amt = self.cash * config.BERKSHIRE["cash_yield"] * years
+            self.cash += amt
+            self.interest += amt
 
     # --------------------------------------------------------- risk gates
     def roll_day(self, day: str, equity: float):
@@ -48,6 +80,8 @@ class Portfolio:
 
     def gate(self, equity: float):
         """Return None if new entries are allowed, else the reason they are not."""
+        if self.mode == "berkshire" and self.cushion(equity) - self.worst_case_loss() <= 1.0:
+            return "no_cushion"
         if self.drawdown_breaker and equity < self.peak * (1 - config.DRAWDOWN_BREAKER):
             return "drawdown_breaker"
         if equity < self.day_start * (1 - config.DAILY_LOSS_HALT):
@@ -57,7 +91,9 @@ class Portfolio:
         return None
 
     # -------------------------------------------------------------- fills
-    def size(self, equity, price, stop, position_pct=None):
+    def size(self, equity, price, stop, position_pct=None, symbol=""):
+        if self.mode == "berkshire":
+            return self._size_berkshire(equity, price, stop, position_pct, symbol)
         if position_pct:
             notional = equity * position_pct
         else:
@@ -69,11 +105,28 @@ class Portfolio:
         notional = min(notional, self.cash * 0.995)
         return max(notional, 0.0) / price
 
+    def _size_berkshire(self, equity, price, stop, position_pct, symbol):
+        b = config.BERKSHIRE
+        room = self.cushion(equity) - self.worst_case_loss()
+        if room <= 0 or price <= stop:
+            return 0.0
+        fee, slip = self._costs(symbol)
+        cost_frac = 2 * (fee + slip)                       # round-trip costs
+        stop_loss_frac = (price - stop) / price + cost_frac
+        worst_frac = (price - stop * (1 - self._gap(symbol))) / price + cost_frac
+        notional = min(b["risk_of_cushion"] * self.cushion(equity) / stop_loss_frac,
+                       equity * config.RISK_PER_TRADE / stop_loss_frac,
+                       room / worst_frac,
+                       b["gap_share"] * self.cushion(equity) / worst_frac,
+                       equity * (position_pct or config.MAX_POSITION_PCT),
+                       self.cash * 0.995)
+        return max(notional, 0.0) / price
+
     def open(self, key, strategy, symbol, price, stop, when, equity, position_pct=None,
              qty=None, note=""):
         fee, slip = self._costs(symbol)
         fill = price * (1 + slip)
-        qty = qty if qty is not None else self.size(equity, fill, stop, position_pct)
+        qty = qty if qty is not None else self.size(equity, fill, stop, position_pct, symbol)
         if qty * fill < 10:          # ignore dust-sized orders
             return None
         cost = qty * fill * (1 + fee)

@@ -79,6 +79,21 @@ def write_summary(st, prices, now):
                                   "stop": p["stop"], "price": prices.get(p["symbol"])}
                                  for p in sh["positions"].values()]}
 
+    bk = st.get("berkshire") or {"cash": config.STARTING_CASH, "positions": {}}
+    bk_eq = bk["cash"] + sum(p["qty"] * prices.get(p["symbol"], p["entry"]) for p in bk["positions"].values())
+    bk_tr = _read_csv("state/berkshire_trades.csv")
+    b = config.BERKSHIRE
+    start = bk.get("start_cash", config.STARTING_CASH)
+    floor = start * b["floor_pct"] + b["lock_in"] * max(0.0, bk.get("peak", start) - start)
+    berkshire = {"equity": round(bk_eq, 2),
+                 "return_pct": round((bk_eq / config.STARTING_CASH - 1) * 100, 3),
+                 "floor": round(floor, 2), "cushion": round(bk_eq - floor, 2),
+                 "interest": round(bk.get("interest", 0.0), 2),
+                 "trades": int(len(bk_tr)), "realized": round(float(bk_tr.pnl.sum()), 2) if len(bk_tr) else 0.0,
+                 "open_positions": [{"strategy": p["strategy"], "symbol": p["symbol"], "entry": p["entry"],
+                                     "stop": p["stop"], "price": prices.get(p["symbol"])}
+                                    for p in bk["positions"].values()]}
+
     summary = {
         "updated": str(now), "started": st.get("started"),
         "starting_cash": config.STARTING_CASH, "equity": round(equity, 2),
@@ -90,7 +105,7 @@ def write_summary(st, prices, now):
         "recent_signals": sigs.tail(25).to_dict("records") if not sigs.empty else [],
         "enabled": json.load(open("state/enabled.json")) if os.path.exists("state/enabled.json") else None,
         "warnings": st.get("warnings", []), "equity_curve": curve, "prices": prices,
-        "shadow": shadow,
+        "shadow": shadow, "berkshire": berkshire, "active_mode": config.ACTIVE_MODE,
     }
     with open("docs/summary.json", "w") as f:
         json.dump(summary, f, indent=2, default=str)

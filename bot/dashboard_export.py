@@ -51,7 +51,13 @@ def main():
             e["shadow_equity"] = she.set_index("time")["equity"].resample("1h").last().reindex(e.index).ffill()
         else:
             e["shadow_equity"] = None
-        e = e.reset_index()[["time", "equity", "btc_hold", "spy_hold", "shadow_equity"]]
+        bke = _csv("state/berkshire_equity.csv")
+        if len(bke):
+            bke["time"] = pd.to_datetime(bke["time"])
+            e["berkshire_equity"] = bke.set_index("time")["equity"].resample("1h").last().reindex(e.index).ffill()
+        else:
+            e["berkshire_equity"] = None
+        e = e.reset_index()[["time", "equity", "btc_hold", "spy_hold", "shadow_equity", "berkshire_equity"]]
         e["time"] = e["time"].dt.strftime("%Y-%m-%dT%H:%M:00Z")
         curve = _rows(e)
 
@@ -70,6 +76,12 @@ def main():
         "bot_healthy": bool(health.get("ok")), "last_tick": health.get("time", "")[:16],
         "shadow_equity": s.get("shadow", {}).get("equity"),
         "shadow_return_pct": s.get("shadow", {}).get("return_pct"),
+        "berkshire_equity": s.get("berkshire", {}).get("equity"),
+        "berkshire_return_pct": s.get("berkshire", {}).get("return_pct"),
+        "berkshire_floor": s.get("berkshire", {}).get("floor"),
+        "berkshire_cushion": s.get("berkshire", {}).get("cushion"),
+        "berkshire_interest": s.get("berkshire", {}).get("interest"),
+        "berkshire_trades": s.get("berkshire", {}).get("trades"),
     }]
 
     strat_rows = []
