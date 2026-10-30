@@ -44,6 +44,104 @@ def load_json(path, default):
         return default
 
 
+def run_book(pf, last_eval, allowed_fn, tag, trades_path, record_signal, ctxdata):
+    now, prices, h1, daily_c, daily, intraday, clock, last_tick, strategies, btc_up, btc_up_d, enabled = ctxdata
+    # ------------------------------------------ 1) protective stops
+    for key, pos in list(pf.positions.items()):
+        if pos["strategy"] == "core" or pos["symbol"] not in prices:
+            continue
+        sym = pos["symbol"]
+        entered = pd.Timestamp(pos["entry_time"])
+        if sym in h1:   # only hourly bars that started after the entry
+            since = max(last_tick.floor("h"), entered.ceil("h"))
+            recent = h1[sym][h1[sym].index >= since]
+        else:
+            ib = intraday.get(sym, pd.DataFrame())
+            recent = ib[ib.index >= max(last_tick, entered)] if len(ib) else ib
+        fill = None
+        if len(recent) and recent.low.min() <= pos["stop"]:
+            hit = recent[recent.low <= pos["stop"]].iloc[0]
+            fill = min(hit.open, pos["stop"])
+        elif prices[sym] <= pos["stop"]:
+            fill = prices[sym]
+        if fill is not None:
+            t = pf.close(key, fill, now, "stop")
+            log(tag + f"STOP {key} exit {t['exit']:.4f} pnl {t['pnl']:+.2f} ({t['r_multiple']}R)", now)
+            append_csv(trades_path, t)
+
+    # ------------------------------- 2) signals on newly closed bars
+    for name, strat in strategies.items():
+        allowed = allowed_fn(name)
+        for sym in (config.CRYPTO if strat.asset == "crypto" else config.INDEX_ETFS):
+            if sym not in prices:
+                continue
+            key = f"{name}:{sym}"
+            if strat.asset == "crypto":
+                if strat.bar == "1D":
+                    if sym not in daily_c:
+                        continue
+                    d = strat.prepare(data.closed_bars(daily_c[sym], "1D", now))
+                else:
+                    d = strat.prepare(data.closed_bars(h1[sym], "1h", now))
+                if d.empty:
+                    continue
+                bar_id = str(d.index[-1])
+            else:
+                if not clock["closing_window"]:
+                    continue                     # decide on daily bars near the close
+                dd = daily[sym][daily[sym].index < clock["date"]].copy()
+                ib = intraday.get(sym, pd.DataFrame())
+                if not len(ib):
+                    continue
+                dd.loc[clock["date"]] = [ib.open.iloc[0], ib.high.max(), ib.low.min(),
+                                         ib.close.iloc[-1], ib.volume.sum()]
+                d = strat.prepare(dd)
+                bar_id = str(clock["date"].date())
+            if last_eval.get(key) == bar_id:
+                continue
+            last_eval[key] = bar_id
+            r = next(d.iloc[[-1]].itertuples(name="Row"))
+            px = prices[sym]
+            if key in pf.positions:
+                pos = pf.positions[key]
+                new_stop, reason = strat.manage(pos, r)
+                if reason:
+                    t = pf.close(key, px, now, reason)
+                    log(tag + f"EXIT {key} ({reason}) {t['exit']:.4f} pnl {t['pnl']:+.2f} ({t['r_multiple']}R)", now)
+                    append_csv(trades_path, t)
+                elif new_stop > pos["stop"]:
+                    log(tag + f"TRAIL {key} stop {pos['stop']:.4f} -> {new_stop:.4f}", now)
+                    pos["stop"] = new_stop
+                continue
+            ctx = {}
+            if name.startswith("trend") and sym != "BTC-USD":
+                ctx = {"btc_uptrend": btc_up_d if name == "trend_daily" else btc_up}
+            stop = strat.entry(r, ctx)
+            if stop is None or stop >= px:
+                continue
+            sig = {"time": str(now), "strategy": name, "symbol": sym, "price": px,
+                   "stop": round(stop, 6), "bar": bar_id}
+            if not allowed:
+                sig["action"] = "skipped: strategy disabled by backtest gate" if enabled else "skipped: awaiting backtest"
+                record_signal(sig)
+                continue
+            equity = pf.equity(prices)
+            blocked = pf.gate(equity)
+            if blocked:
+                sig["action"] = f"skipped: {blocked}"
+                record_signal(sig)
+                log(tag + f"SIGNAL {key} skipped ({blocked})", now)
+                continue
+            pos = pf.open(key, name, sym, px, stop, now, equity,
+                          position_pct=strat.p.get("position_pct"))
+            if pos:
+                sig["action"] = "opened"
+                record_signal(sig)
+                log(tag + f"BUY {key} qty={pos['qty']:.6f} @ {pos['entry']:.4f} stop {stop:.4f} "
+                    f"(${pos['qty']*pos['entry']:.0f})", now)
+
+
+
 def main():
     os.makedirs("state", exist_ok=True)
     os.makedirs("docs", exist_ok=True)
@@ -96,31 +194,7 @@ def main():
     equity = pf.equity(prices)
     pf.roll_day(str(now.date()), equity)
 
-    # ------------------------------------------ 1) protective stops
     last_tick = pd.Timestamp(st.get("last_tick", str(now - pd.Timedelta("15min"))))
-    for key, pos in list(pf.positions.items()):
-        if pos["strategy"] == "core" or pos["symbol"] not in prices:
-            continue
-        sym = pos["symbol"]
-        entered = pd.Timestamp(pos["entry_time"])
-        if sym in h1:   # only hourly bars that started after the entry
-            since = max(last_tick.floor("h"), entered.ceil("h"))
-            recent = h1[sym][h1[sym].index >= since]
-        else:
-            ib = intraday.get(sym, pd.DataFrame())
-            recent = ib[ib.index >= max(last_tick, entered)] if len(ib) else ib
-        fill = None
-        if len(recent) and recent.low.min() <= pos["stop"]:
-            hit = recent[recent.low <= pos["stop"]].iloc[0]
-            fill = min(hit.open, pos["stop"])
-        elif prices[sym] <= pos["stop"]:
-            fill = prices[sym]
-        if fill is not None:
-            t = pf.close(key, fill, now, "stop")
-            log(f"STOP {key} exit {t['exit']:.4f} pnl {t['pnl']:+.2f} ({t['r_multiple']}R)", now)
-            append_csv("state/trades.csv", t)
-
-    # ------------------------------- 2) signals on newly closed bars
     strategies = all_strategies()
     btc_up, btc_up_d = None, None
     if "BTC-USD" in h1:
@@ -129,76 +203,26 @@ def main():
     if "BTC-USD" in daily_c:
         bd = strategies["trend_daily"].prepare(data.closed_bars(daily_c["BTC-USD"], "1D", now))
         btc_up_d = bool(bd.uptrend.iloc[-1]) if len(bd) else None
+    ctxdata = (now, prices, h1, daily_c, daily, intraday, clock, last_tick, strategies,
+               btc_up, btc_up_d, enabled)
 
-    for name, strat in strategies.items():
-        allowed = (enabled or config.DEFAULT_ENABLED).get(name, False) and enabled is not None
-        for sym in (config.CRYPTO if strat.asset == "crypto" else config.INDEX_ETFS):
-            if sym not in prices:
-                continue
-            key = f"{name}:{sym}"
-            if strat.asset == "crypto":
-                if strat.bar == "1D":
-                    if sym not in daily_c:
-                        continue
-                    d = strat.prepare(data.closed_bars(daily_c[sym], "1D", now))
-                else:
-                    d = strat.prepare(data.closed_bars(h1[sym], "1h", now))
-                if d.empty:
-                    continue
-                bar_id = str(d.index[-1])
-            else:
-                if not clock["closing_window"]:
-                    continue                     # decide on daily bars near the close
-                dd = daily[sym][daily[sym].index < clock["date"]].copy()
-                ib = intraday.get(sym, pd.DataFrame())
-                if not len(ib):
-                    continue
-                dd.loc[clock["date"]] = [ib.open.iloc[0], ib.high.max(), ib.low.min(),
-                                         ib.close.iloc[-1], ib.volume.sum()]
-                d = strat.prepare(dd)
-                bar_id = str(clock["date"].date())
-            if last_eval.get(key) == bar_id:
-                continue
-            last_eval[key] = bar_id
-            r = next(d.iloc[[-1]].itertuples(name="Row"))
-            px = prices[sym]
-            if key in pf.positions:
-                pos = pf.positions[key]
-                new_stop, reason = strat.manage(pos, r)
-                if reason:
-                    t = pf.close(key, px, now, reason)
-                    log(f"EXIT {key} ({reason}) {t['exit']:.4f} pnl {t['pnl']:+.2f} ({t['r_multiple']}R)", now)
-                    append_csv("state/trades.csv", t)
-                elif new_stop > pos["stop"]:
-                    log(f"TRAIL {key} stop {pos['stop']:.4f} -> {new_stop:.4f}", now)
-                    pos["stop"] = new_stop
-                continue
-            ctx = {}
-            if name.startswith("trend") and sym != "BTC-USD":
-                ctx = {"btc_uptrend": btc_up_d if name == "trend_daily" else btc_up}
-            stop = strat.entry(r, ctx)
-            if stop is None or stop >= px:
-                continue
-            sig = {"time": str(now), "strategy": name, "symbol": sym, "price": px,
-                   "stop": round(stop, 6), "bar": bar_id}
-            if not allowed:
-                sig["action"] = "skipped: strategy disabled by backtest gate" if enabled else "skipped: awaiting backtest"
-                append_csv("state/signals.csv", sig)
-                continue
-            equity = pf.equity(prices)
-            blocked = pf.gate(equity)
-            if blocked:
-                sig["action"] = f"skipped: {blocked}"
-                append_csv("state/signals.csv", sig)
-                log(f"SIGNAL {key} skipped ({blocked})", now)
-                continue
-            pos = pf.open(key, name, sym, px, stop, now, equity,
-                          position_pct=strat.p.get("position_pct"))
-            if pos:
-                sig["action"] = "opened"
-                append_csv("state/signals.csv", sig)
-                log(f"BUY {key} qty={pos['qty']:.6f} @ {pos['entry']:.4f} stop {stop:.4f} "
-                    f"(${pos['qty']*pos['entry']:.0f})", now)
+    # Main book: only strategies that passed the backtest gate trade.
+    run_book(pf, last_eval,
+             lambda n: bool(enabled) and bool(enabled.get(n, False)),
+             "", "state/trades.csv", lambda sig: append_csv("state/signals.csv", sig), ctxdata)
+
+    # Shadow book: every strategy trades its own $10k, so we can see live how
+    # the gated-out ones would have done. Never mixed into the main account.
+    sh = Portfolio(state=st.get("shadow"))
+    sh_eval = st.get("shadow_eval", {})
+    run_book(sh, sh_eval, lambda n: True, "[shadow] ", "state/shadow_trades.csv",
+             lambda sig: None, ctxdata)
+    sh_eq = sh.equity(prices)
+    sh.roll_day(str(now.date()), sh_eq)
+    append_csv("state/shadow_equity.csv", {"time": now.strftime("%Y-%m-%d %H:%M"),
+                                           "equity": round(sh_eq, 2),
+                                           "open_positions": len(sh.positions)})
+    st.update({"shadow": sh.to_state(), "shadow_eval": sh_eval})
 
     # ------------------------------------------------------- record
     equity = pf.equity(prices)

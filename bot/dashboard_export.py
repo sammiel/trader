@@ -45,7 +45,13 @@ def main():
         b0, s0 = e["btc"].dropna().iloc[0], e["spy"].dropna().iloc[0]
         e["btc_hold"] = (config.STARTING_CASH * e["btc"] / b0).round(2)
         e["spy_hold"] = (config.STARTING_CASH * e["spy"] / s0).round(2)
-        e = e.reset_index()[["time", "equity", "btc_hold", "spy_hold"]]
+        she = _csv("state/shadow_equity.csv")
+        if len(she):
+            she["time"] = pd.to_datetime(she["time"])
+            e["shadow_equity"] = she.set_index("time")["equity"].resample("1h").last().reindex(e.index).ffill()
+        else:
+            e["shadow_equity"] = None
+        e = e.reset_index()[["time", "equity", "btc_hold", "spy_hold", "shadow_equity"]]
         e["time"] = e["time"].dt.strftime("%Y-%m-%dT%H:%M:00Z")
         curve = _rows(e)
 
@@ -62,6 +68,8 @@ def main():
         "btc_hold_pct": s.get("benchmark_return_pct", {}).get("BTC-USD"),
         "spy_hold_pct": s.get("benchmark_return_pct", {}).get("SPY"),
         "bot_healthy": bool(health.get("ok")), "last_tick": health.get("time", "")[:16],
+        "shadow_equity": s.get("shadow", {}).get("equity"),
+        "shadow_return_pct": s.get("shadow", {}).get("return_pct"),
     }]
 
     strat_rows = []
@@ -73,11 +81,14 @@ def main():
         b = bt.get("strategies", {}).get(key, {})
         a, o, e = b.get("all", {}), b.get("out_of_sample", {}), b.get("equity", {})
         lv = live.get(key, {})
+        sv = s.get("shadow", {}).get("by_strategy", {}).get(key, {})
         strat_rows.append({
             "strategy": label,
             "status": "holding" if key == "core" else ("trading" if enabled.get(key) else "off (failed gate)" if enabled else "awaiting backtest"),
             "live_trades": lv.get("trades", 0), "live_realized": lv.get("realized", 0.0),
             "live_unrealized": lv.get("unrealized", 0.0),
+            "shadow_trades": None if key == "core" else sv.get("trades", 0),
+            "shadow_pnl": None if key == "core" else round(sv.get("realized", 0.0) + sv.get("unrealized", 0.0), 2),
             "bt_trades": a.get("trades"), "bt_win_rate": a.get("win_rate"),
             "bt_profit_factor": a.get("profit_factor"), "bt_cagr_pct": e.get("cagr_pct"),
             "bt_max_dd_pct": e.get("max_drawdown_pct"), "bt_oos_pf": o.get("profit_factor"),

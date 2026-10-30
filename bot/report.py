@@ -59,6 +59,26 @@ def write_summary(st, prices, now):
             if pd.notna(first.get(col)) and prices.get(sym):
                 bench[sym] = round((prices[sym] / first[col] - 1) * 100, 2)
 
+    # Shadow book: every strategy, gated or not, on its own $10k
+    sh = st.get("shadow") or {"cash": config.STARTING_CASH, "positions": {}}
+    sh_eq = sh["cash"] + sum(p["qty"] * prices.get(p["symbol"], p["entry"]) for p in sh["positions"].values())
+    sh_tr = _read_csv("state/shadow_trades.csv")
+    sh_by = {}
+    if not sh_tr.empty:
+        for name, g in sh_tr.groupby("strategy"):
+            sh_by[name] = {"trades": int(len(g)), "wins": int((g.pnl > 0).sum()),
+                           "realized": round(g.pnl.sum(), 2)}
+    for p in sh["positions"].values():
+        b = sh_by.setdefault(p["strategy"], {"trades": 0, "wins": 0, "realized": 0.0})
+        b["unrealized"] = round(b.get("unrealized", 0) + p["qty"] * (prices.get(p["symbol"], p["entry"]) - p["entry"]), 2)
+        b["open"] = b.get("open", 0) + 1
+    shadow = {"equity": round(sh_eq, 2),
+              "return_pct": round((sh_eq / config.STARTING_CASH - 1) * 100, 2),
+              "by_strategy": sh_by,
+              "open_positions": [{"strategy": p["strategy"], "symbol": p["symbol"], "entry": p["entry"],
+                                  "stop": p["stop"], "price": prices.get(p["symbol"])}
+                                 for p in sh["positions"].values()]}
+
     summary = {
         "updated": str(now), "started": st.get("started"),
         "starting_cash": config.STARTING_CASH, "equity": round(equity, 2),
@@ -70,6 +90,7 @@ def write_summary(st, prices, now):
         "recent_signals": sigs.tail(25).to_dict("records") if not sigs.empty else [],
         "enabled": json.load(open("state/enabled.json")) if os.path.exists("state/enabled.json") else None,
         "warnings": st.get("warnings", []), "equity_curve": curve, "prices": prices,
+        "shadow": shadow,
     }
     with open("docs/summary.json", "w") as f:
         json.dump(summary, f, indent=2, default=str)
