@@ -1,0 +1,66 @@
+{
+  "updated": "2026-10-30 13:23:43.022220+00:00",
+  "started": "2026-10-30 13:23:43.022220+00:00",
+  "starting_cash": 10000.0,
+  "equity": 9997.9,
+  "cash": 8001.9,
+  "return_pct": -0.02,
+  "max_drawdown_pct": 0.0,
+  "benchmark_return_pct": {
+    "BTC-USD": 0.0,
+    "SPY": 0.0
+  },
+  "by_strategy": {
+    "core": {
+      "trades": 0,
+      "wins": 0,
+      "realized": 0.0,
+      "unrealized": -1.1
+    }
+  },
+  "open_positions": [
+    {
+      "strategy": "core",
+      "symbol": "BTC-USD",
+      "entry": 77267.49458399999,
+      "price": 77205.73,
+      "stop": 0.0,
+      "value": 998.0,
+      "unrealized": -0.8,
+      "ret_pct": -0.08,
+      "since": "2026-10-30 13:23:43.022220+00:00"
+    },
+    {
+      "strategy": "core",
+      "symbol": "SPY",
+      "entry": 769.590793347168,
+      "price": 769.3599853515625,
+      "stop": 0.0,
+      "value": 998.0,
+      "unrealized": -0.3,
+      "ret_pct": -0.03,
+      "since": "2026-10-30 13:23:43.022220+00:00"
+    }
+  ],
+  "recent_trades": [],
+  "recent_signals": [],
+  "enabled": null,
+  "warnings": [],
+  "equity_curve": [
+    [
+      "2026-10-30 13:00:00",
+      9997.9
+    ]
+  ],
+  "prices": {
+    "BTC-USD": 77205.73,
+    "ETH-USD": 2229.72,
+    "SOL-USD": 96.12,
+    "XRP-USD": 1.2457,
+    "LINK-USD": 11.062,
+    "AVAX-USD": 8.271,
+    "SPY": 769.3599853515625,
+    "QQQ": 715.3400268554688,
+    "IWM": 284.010009765625
+  }
+}
