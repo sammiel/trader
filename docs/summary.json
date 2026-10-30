@@ -1,21 +1,21 @@
 {
-  "updated": "2026-10-30 13:49:06.659146+00:00",
+  "updated": "2026-10-30 14:20:30.741435+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 9979.32,
+  "equity": 9977.63,
   "cash": 8001.9,
-  "return_pct": -0.21,
-  "max_drawdown_pct": -0.19,
+  "return_pct": -0.22,
+  "max_drawdown_pct": -0.2,
   "benchmark_return_pct": {
-    "BTC-USD": -0.72,
-    "SPY": -1.14
+    "BTC-USD": -0.6,
+    "SPY": -1.43
   },
   "by_strategy": {
     "core": {
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -19.68
+      "unrealized": -21.37
     }
   },
   "open_positions": [
@@ -23,22 +23,22 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 76649.98,
+      "price": 76742.02,
       "stop": 0.0,
-      "value": 990.82,
-      "unrealized": -7.98,
-      "ret_pct": -0.8,
+      "value": 992.01,
+      "unrealized": -6.79,
+      "ret_pct": -0.68,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "core",
       "symbol": "SPY",
       "entry": 769.590793347168,
-      "price": 760.5700073242188,
+      "price": 758.3499755859375,
       "stop": 0.0,
-      "value": 986.6,
-      "unrealized": -11.7,
-      "ret_pct": -1.17,
+      "value": 983.72,
+      "unrealized": -14.58,
+      "ret_pct": -1.46,
       "since": "2026-10-30 13:23:43.022220+00:00"
     }
   ],
@@ -56,18 +56,22 @@
     [
       "2026-10-30 13:00:00",
       9979.32
+    ],
+    [
+      "2026-10-30 14:00:00",
+      9977.63
     ]
   ],
   "prices": {
-    "BTC-USD": 76649.98,
-    "ETH-USD": 2212.23,
-    "SOL-USD": 94.7,
-    "XRP-USD": 1.2339,
-    "LINK-USD": 10.933,
-    "AVAX-USD": 8.199,
-    "SPY": 760.5700073242188,
-    "QQQ": 696.4979858398438,
-    "IWM": 281.4800109863281
+    "BTC-USD": 76742.02,
+    "ETH-USD": 2219.76,
+    "SOL-USD": 94.76,
+    "XRP-USD": 1.2328,
+    "LINK-USD": 10.937,
+    "AVAX-USD": 8.214,
+    "SPY": 758.3499755859375,
+    "QQQ": 694.3699951171875,
+    "IWM": 280.44000244140625
   },
   "shadow": {
     "equity": 10000.0,
@@ -76,11 +80,11 @@
     "open_positions": []
   },
   "berkshire": {
-    "equity": 10000.0,
+    "equity": 10000.02,
     "return_pct": 0.0,
-    "floor": 10000.0,
-    "cushion": 0.0,
-    "interest": 0.0,
+    "floor": 10000.01,
+    "cushion": 0.01,
+    "interest": 0.02,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
