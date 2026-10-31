@@ -1,8 +1,8 @@
 {
-  "updated": "2026-10-31 23:15:21.370316+00:00",
+  "updated": "2026-10-31 23:30:20.960239+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10003.73,
+  "equity": 10003.72,
   "cash": 4016.78,
   "return_pct": 0.04,
   "max_drawdown_pct": -0.36,
@@ -29,9 +29,9 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 77391.58,
+      "price": 77391.07,
       "stop": 0.0,
-      "value": 1000.41,
+      "value": 1000.4,
       "unrealized": 1.6,
       "ret_pct": 0.16,
       "since": "2026-10-30 13:23:43.022220+00:00"
@@ -234,16 +234,16 @@
     ],
     [
       "2026-10-31 23:00:00",
-      10003.73
+      10003.72
     ]
   ],
   "prices": {
-    "BTC-USD": 77391.58,
-    "ETH-USD": 2251.23,
-    "SOL-USD": 95.39,
-    "XRP-USD": 1.2499,
-    "LINK-USD": 11.697,
-    "AVAX-USD": 8.548,
+    "BTC-USD": 77391.07,
+    "ETH-USD": 2252.32,
+    "SOL-USD": 95.26,
+    "XRP-USD": 1.2495,
+    "LINK-USD": 11.649,
+    "AVAX-USD": 8.551,
     "SPY": 755.719970703125,
     "QQQ": 690.489990234375,
     "IWM": 279.3299865722656
@@ -278,11 +278,11 @@
     ]
   },
   "berkshire": {
-    "equity": 10001.49,
+    "equity": 10001.5,
     "return_pct": 0.015,
-    "floor": 10000.74,
-    "cushion": 0.74,
-    "interest": 1.49,
+    "floor": 10000.75,
+    "cushion": 0.75,
+    "interest": 1.5,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -1326,6 +1326,14 @@
       "berkshire": 10001.49,
       "shadow": 10021.19,
       "btc_hold": 10024.07,
+      "spy_hold": 9822.71
+    },
+    {
+      "t": "2026-10-31T23:30Z",
+      "equity": 10003.72,
+      "berkshire": 10001.5,
+      "shadow": 10021.19,
+      "btc_hold": 10024.01,
       "spy_hold": 9822.71
     }
   ],
