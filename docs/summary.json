@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31 00:00:21.193890+00:00",
+  "updated": "2026-10-31 00:15:20.811165+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
   "equity": NaN,
@@ -7,7 +7,7 @@
   "return_pct": NaN,
   "max_drawdown_pct": -0.36,
   "benchmark_return_pct": {
-    "BTC-USD": 0.02,
+    "BTC-USD": -0.02,
     "SPY": NaN
   },
   "by_strategy": {
@@ -29,11 +29,11 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 77219.32,
+      "price": 77191.68,
       "stop": 0.0,
-      "value": 998.18,
-      "unrealized": -0.62,
-      "ret_pct": -0.06,
+      "value": 997.82,
+      "unrealized": -0.98,
+      "ret_pct": -0.1,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
@@ -146,12 +146,12 @@
     ]
   ],
   "prices": {
-    "BTC-USD": 77219.32,
-    "ETH-USD": 2241.66,
-    "SOL-USD": 96.21,
-    "XRP-USD": 1.2546,
-    "LINK-USD": 11.424,
-    "AVAX-USD": 8.53,
+    "BTC-USD": 77191.68,
+    "ETH-USD": 2243.14,
+    "SOL-USD": 96.17,
+    "XRP-USD": 1.2565,
+    "LINK-USD": 11.52,
+    "AVAX-USD": 8.563,
     "SPY": NaN,
     "QQQ": NaN,
     "IWM": NaN
@@ -186,11 +186,11 @@
     ]
   },
   "berkshire": {
-    "equity": 10000.45,
+    "equity": 10000.46,
     "return_pct": 0.005,
     "floor": 10000.23,
     "cushion": 0.23,
-    "interest": 0.45,
+    "interest": 0.46,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
