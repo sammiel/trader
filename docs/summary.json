@@ -1,13 +1,13 @@
 {
-  "updated": "2026-10-31 18:00:20.959933+00:00",
+  "updated": "2026-10-31 18:15:21.066734+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10005.69,
+  "equity": 10006.08,
   "cash": 4016.78,
   "return_pct": 0.06,
   "max_drawdown_pct": -0.36,
   "benchmark_return_pct": {
-    "BTC-USD": 0.44,
+    "BTC-USD": 0.48,
     "SPY": -1.77
   },
   "by_strategy": {
@@ -15,7 +15,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -14.42
+      "unrealized": -14.04
     },
     "index_pullback": {
       "trades": 0,
@@ -29,11 +29,11 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 77543.41,
+      "price": 77573.31,
       "stop": 0.0,
-      "value": 1002.37,
-      "unrealized": 3.57,
-      "ret_pct": 0.36,
+      "value": 1002.76,
+      "unrealized": 3.95,
+      "ret_pct": 0.4,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
@@ -214,16 +214,16 @@
     ],
     [
       "2026-10-31 18:00:00",
-      10005.69
+      10006.08
     ]
   ],
   "prices": {
-    "BTC-USD": 77543.41,
-    "ETH-USD": 2251.66,
-    "SOL-USD": 95.86,
-    "XRP-USD": 1.2519,
-    "LINK-USD": 11.664,
-    "AVAX-USD": 8.544,
+    "BTC-USD": 77573.31,
+    "ETH-USD": 2254.39,
+    "SOL-USD": 96.02,
+    "XRP-USD": 1.2531,
+    "LINK-USD": 11.713,
+    "AVAX-USD": 8.56,
     "SPY": 755.719970703125,
     "QQQ": 690.489990234375,
     "IWM": 279.3299865722656
@@ -258,11 +258,11 @@
     ]
   },
   "berkshire": {
-    "equity": 10001.25,
+    "equity": 10001.27,
     "return_pct": 0.013,
     "floor": 10000.63,
     "cushion": 0.63,
-    "interest": 1.25,
+    "interest": 1.27,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -1138,6 +1138,14 @@
       "berkshire": 10001.25,
       "shadow": 10021.19,
       "btc_hold": 10043.74,
+      "spy_hold": 9822.71
+    },
+    {
+      "t": "2026-10-31T18:15Z",
+      "equity": 10006.08,
+      "berkshire": 10001.27,
+      "shadow": 10021.19,
+      "btc_hold": 10047.61,
       "spy_hold": 9822.71
     }
   ],
