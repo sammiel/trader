@@ -1,13 +1,13 @@
 {
-  "updated": "2026-10-31 07:15:21.035244+00:00",
+  "updated": "2026-10-31 07:30:21.474380+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10002.35,
+  "equity": 10002.25,
   "cash": 4016.78,
   "return_pct": 0.02,
   "max_drawdown_pct": -0.36,
   "benchmark_return_pct": {
-    "BTC-USD": 0.1,
+    "BTC-USD": 0.09,
     "SPY": -1.77
   },
   "by_strategy": {
@@ -15,7 +15,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -17.76
+      "unrealized": -17.86
     },
     "index_pullback": {
       "trades": 0,
@@ -29,11 +29,11 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 77285.15,
+      "price": 77277.51,
       "stop": 0.0,
-      "value": 999.03,
-      "unrealized": 0.23,
-      "ret_pct": 0.02,
+      "value": 998.93,
+      "unrealized": 0.13,
+      "ret_pct": 0.01,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
@@ -170,15 +170,15 @@
     ],
     [
       "2026-10-31 07:00:00",
-      10002.35
+      10002.25
     ]
   ],
   "prices": {
-    "BTC-USD": 77285.15,
-    "ETH-USD": 2241.51,
-    "SOL-USD": 95.69,
-    "XRP-USD": 1.2459,
-    "LINK-USD": 11.458,
+    "BTC-USD": 77277.51,
+    "ETH-USD": 2242.45,
+    "SOL-USD": 95.74,
+    "XRP-USD": 1.2453,
+    "LINK-USD": 11.418,
     "AVAX-USD": 8.491,
     "SPY": 755.719970703125,
     "QQQ": 690.489990234375,
@@ -214,11 +214,11 @@
     ]
   },
   "berkshire": {
-    "equity": 10000.78,
+    "equity": 10000.79,
     "return_pct": 0.008,
     "floor": 10000.39,
     "cushion": 0.39,
-    "interest": 0.78,
+    "interest": 0.79,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -750,6 +750,14 @@
       "berkshire": 10000.78,
       "shadow": 10021.19,
       "btc_hold": 10010.29,
+      "spy_hold": 9822.71
+    },
+    {
+      "t": "2026-10-31T07:30Z",
+      "equity": 10002.25,
+      "berkshire": 10000.79,
+      "shadow": 10021.19,
+      "btc_hold": 10009.3,
       "spy_hold": 9822.71
     }
   ],
