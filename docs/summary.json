@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-01 10:45:20.802830+00:00",
+  "updated": "2026-11-01 11:00:21.380456+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10010.13,
+  "equity": 10010.15,
   "cash": 4016.78,
   "return_pct": 0.1,
   "max_drawdown_pct": -0.36,
@@ -15,7 +15,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -9.99
+      "unrealized": -9.97
     },
     "index_pullback": {
       "trades": 0,
@@ -29,10 +29,10 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 77886.6,
+      "price": 77888.09,
       "stop": 0.0,
-      "value": 1006.81,
-      "unrealized": 8.0,
+      "value": 1006.82,
+      "unrealized": 8.02,
       "ret_pct": 0.8,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
@@ -279,15 +279,19 @@
     [
       "2026-11-01 10:00:00",
       10010.13
+    ],
+    [
+      "2026-11-01 11:00:00",
+      10010.15
     ]
   ],
   "prices": {
-    "BTC-USD": 77886.6,
-    "ETH-USD": 2267.42,
-    "SOL-USD": 95.23,
-    "XRP-USD": 1.2543,
-    "LINK-USD": 11.72,
-    "AVAX-USD": 8.78,
+    "BTC-USD": 77888.09,
+    "ETH-USD": 2266.92,
+    "SOL-USD": 95.27,
+    "XRP-USD": 1.2547,
+    "LINK-USD": 11.731,
+    "AVAX-USD": 8.786,
     "SPY": 755.719970703125,
     "QQQ": 690.489990234375,
     "IWM": 279.3299865722656
@@ -322,11 +326,11 @@
     ]
   },
   "berkshire": {
-    "equity": 10002.0,
+    "equity": 10002.01,
     "return_pct": 0.02,
-    "floor": 10001.0,
-    "cushion": 1.0,
-    "interest": 2.0,
+    "floor": 10001.01,
+    "cushion": 1.01,
+    "interest": 2.01,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -1738,6 +1742,14 @@
       "berkshire": 10002.0,
       "shadow": 10021.19,
       "btc_hold": 10088.19,
+      "spy_hold": 9822.71
+    },
+    {
+      "t": "2026-11-01T11:00Z",
+      "equity": 10010.15,
+      "berkshire": 10002.01,
+      "shadow": 10021.19,
+      "btc_hold": 10088.38,
       "spy_hold": 9822.71
     }
   ],
