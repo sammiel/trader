@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-01 04:30:20.708015+00:00",
+  "updated": "2026-11-01 04:45:20.665132+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10007.47,
+  "equity": 10007.49,
   "cash": 4016.78,
   "return_pct": 0.07,
   "max_drawdown_pct": -0.36,
@@ -15,7 +15,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -12.64
+      "unrealized": -12.62
     },
     "index_pullback": {
       "trades": 0,
@@ -29,10 +29,10 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 77681.26,
+      "price": 77682.55,
       "stop": 0.0,
-      "value": 1004.15,
-      "unrealized": 5.35,
+      "value": 1004.17,
+      "unrealized": 5.37,
       "ret_pct": 0.54,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
@@ -254,16 +254,16 @@
     ],
     [
       "2026-11-01 04:00:00",
-      10007.47
+      10007.49
     ]
   ],
   "prices": {
-    "BTC-USD": 77681.26,
-    "ETH-USD": 2266.01,
-    "SOL-USD": 95.49,
-    "XRP-USD": 1.2498,
-    "LINK-USD": 11.555,
-    "AVAX-USD": 8.676,
+    "BTC-USD": 77682.55,
+    "ETH-USD": 2264.0,
+    "SOL-USD": 95.34,
+    "XRP-USD": 1.2485,
+    "LINK-USD": 11.577,
+    "AVAX-USD": 8.732,
     "SPY": 755.719970703125,
     "QQQ": 690.489990234375,
     "IWM": 279.3299865722656
@@ -298,11 +298,11 @@
     ]
   },
   "berkshire": {
-    "equity": 10001.72,
+    "equity": 10001.73,
     "return_pct": 0.017,
-    "floor": 10000.86,
-    "cushion": 0.86,
-    "interest": 1.72,
+    "floor": 10000.87,
+    "cushion": 0.87,
+    "interest": 1.73,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -1514,6 +1514,14 @@
       "berkshire": 10001.72,
       "shadow": 10021.19,
       "btc_hold": 10061.59,
+      "spy_hold": 9822.71
+    },
+    {
+      "t": "2026-11-01T04:45Z",
+      "equity": 10007.49,
+      "berkshire": 10001.73,
+      "shadow": 10021.19,
+      "btc_hold": 10061.76,
       "spy_hold": 9822.71
     }
   ],
