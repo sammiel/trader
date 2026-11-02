@@ -85,22 +85,22 @@
     "trend_daily:XRP-USD": "2026-11-01 00:00:00+00:00",
     "trend_daily:LINK-USD": "2026-11-01 00:00:00+00:00",
     "trend_daily:AVAX-USD": "2026-11-01 00:00:00+00:00",
-    "index_pullback:SPY": "2026-10-30",
-    "index_pullback:QQQ": "2026-10-30",
-    "index_pullback:IWM": "2026-10-30"
+    "index_pullback:SPY": "2026-11-02",
+    "index_pullback:QQQ": "2026-11-02",
+    "index_pullback:IWM": "2026-11-02"
   },
-  "last_tick": "2026-11-02 20:15:21.083074+00:00",
+  "last_tick": "2026-11-02 20:30:21.331829+00:00",
   "warnings": [],
   "prices": {
-    "BTC-USD": 76788.96,
-    "ETH-USD": 2247.04,
-    "SOL-USD": 91.42,
-    "XRP-USD": 1.2483,
-    "LINK-USD": 11.058,
-    "AVAX-USD": 8.326,
-    "SPY": 754.5349731445312,
-    "QQQ": 684.47998046875,
-    "IWM": 279.989990234375
+    "BTC-USD": 76848.28,
+    "ETH-USD": 2247.96,
+    "SOL-USD": 91.57,
+    "XRP-USD": 1.2481,
+    "LINK-USD": 11.081,
+    "AVAX-USD": 8.364,
+    "SPY": 753.739990234375,
+    "QQQ": 683.469970703125,
+    "IWM": 279.8999938964844
   },
   "shadow": {
     "cash": 6000.119964010797,
@@ -159,18 +159,18 @@
     "bounce:XRP-USD": "2026-11-02 19:00:00+00:00",
     "bounce:LINK-USD": "2026-11-02 19:00:00+00:00",
     "bounce:AVAX-USD": "2026-11-02 19:00:00+00:00",
-    "index_pullback:SPY": "2026-10-30",
-    "index_pullback:QQQ": "2026-10-30",
-    "index_pullback:IWM": "2026-10-30"
+    "index_pullback:SPY": "2026-11-02",
+    "index_pullback:QQQ": "2026-11-02",
+    "index_pullback:IWM": "2026-11-02"
   },
   "berkshire": {
-    "cash": 10003.490290173375,
+    "cash": 10003.501419649554,
     "positions": {},
-    "peak": 10003.490290173375,
+    "peak": 10003.501419649554,
     "day": "2026-11-02",
     "day_start": 10002.589372076454,
     "start_cash": 10000.0,
-    "interest": 3.4902901733882263
+    "interest": 3.501419649568162
   },
   "berkshire_eval": {
     "trend:BTC-USD": "2026-11-02 16:00:00+00:00",
@@ -191,9 +191,9 @@
     "bounce:XRP-USD": "2026-11-02 19:00:00+00:00",
     "bounce:LINK-USD": "2026-11-02 19:00:00+00:00",
     "bounce:AVAX-USD": "2026-11-02 19:00:00+00:00",
-    "index_pullback:SPY": "2026-10-30",
-    "index_pullback:QQQ": "2026-10-30",
-    "index_pullback:IWM": "2026-10-30"
+    "index_pullback:SPY": "2026-11-02",
+    "index_pullback:QQQ": "2026-11-02",
+    "index_pullback:IWM": "2026-11-02"
   },
-  "berkshire_last": "2026-11-02 20:15:21.083074+00:00"
+  "berkshire_last": "2026-11-02 20:30:21.331829+00:00"
 }
