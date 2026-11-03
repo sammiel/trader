@@ -1,27 +1,27 @@
 {
-  "updated": "2026-11-03 00:45:20.851339+00:00",
+  "updated": "2026-11-03 01:00:21.548590+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 9956.74,
+  "equity": NaN,
   "cash": 4016.78,
-  "return_pct": -0.43,
+  "return_pct": NaN,
   "max_drawdown_pct": -1.11,
   "benchmark_return_pct": {
-    "BTC-USD": -0.3,
-    "SPY": -2.24
+    "BTC-USD": -0.34,
+    "SPY": NaN
   },
   "by_strategy": {
     "core": {
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -26.53
+      "unrealized": NaN
     },
     "index_pullback": {
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -15.74
+      "unrealized": NaN
     }
   },
   "open_positions": [
@@ -29,44 +29,44 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 76970.78,
+      "price": 76943.63,
       "stop": 0.0,
-      "value": 994.97,
-      "unrealized": -3.84,
-      "ret_pct": -0.38,
+      "value": 994.62,
+      "unrealized": -4.19,
+      "ret_pct": -0.42,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "core",
       "symbol": "SPY",
       "entry": 769.590793347168,
-      "price": 752.0999755859375,
+      "price": NaN,
       "stop": 0.0,
-      "value": 975.61,
-      "unrealized": -22.69,
-      "ret_pct": -2.27,
+      "value": NaN,
+      "unrealized": NaN,
+      "ret_pct": NaN,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "index_pullback",
       "symbol": "SPY",
       "entry": 751.195261694336,
-      "price": 752.0999755859375,
+      "price": NaN,
       "stop": 690.892373046875,
-      "value": 1995.01,
-      "unrealized": 2.4,
-      "ret_pct": 0.12,
+      "value": NaN,
+      "unrealized": NaN,
+      "ret_pct": NaN,
       "since": "2026-10-30 19:30:21.509312+00:00"
     },
     {
       "strategy": "index_pullback",
       "symbol": "QQQ",
       "entry": 687.3461566528321,
-      "price": 681.0900268554688,
+      "price": NaN,
       "stop": 632.1688134765625,
-      "value": 1974.36,
-      "unrealized": -18.14,
-      "ret_pct": -0.91,
+      "value": NaN,
+      "unrealized": NaN,
+      "ret_pct": NaN,
       "since": "2026-10-30 19:30:21.509312+00:00"
     }
   ],
@@ -434,25 +434,25 @@
     ]
   ],
   "prices": {
-    "BTC-USD": 76970.78,
-    "ETH-USD": 2253.44,
-    "SOL-USD": 92.3,
-    "XRP-USD": 1.2493,
-    "LINK-USD": 11.128,
-    "AVAX-USD": 8.412,
-    "SPY": 752.0999755859375,
-    "QQQ": 681.0900268554688,
-    "IWM": 279.1400146484375
+    "BTC-USD": 76943.63,
+    "ETH-USD": 2253.02,
+    "SOL-USD": 92.18,
+    "XRP-USD": 1.2479,
+    "LINK-USD": 11.094,
+    "AVAX-USD": 8.382,
+    "SPY": NaN,
+    "QQQ": NaN,
+    "IWM": NaN
   },
   "shadow": {
-    "equity": 9984.21,
-    "return_pct": -0.16,
+    "equity": NaN,
+    "return_pct": NaN,
     "by_strategy": {
       "index_pullback": {
         "trades": 0,
         "wins": 0,
         "realized": 0.0,
-        "unrealized": -15.79,
+        "unrealized": NaN,
         "open": 2
       }
     },
@@ -462,23 +462,23 @@
         "symbol": "SPY",
         "entry": 751.195261694336,
         "stop": 690.892373046875,
-        "price": 752.0999755859375
+        "price": NaN
       },
       {
         "strategy": "index_pullback",
         "symbol": "QQQ",
         "entry": 687.3461566528321,
         "stop": 632.1688134765625,
-        "price": 681.0900268554688
+        "price": NaN
       }
     ]
   },
   "berkshire": {
-    "equity": 10003.69,
+    "equity": 10003.7,
     "return_pct": 0.037,
     "floor": 10001.85,
     "cushion": 1.85,
-    "interest": 3.69,
+    "interest": 3.7,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
