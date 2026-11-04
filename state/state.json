@@ -1,7 +1,7 @@
 {
   "started": "2026-10-30 13:23:43.022220+00:00",
   "portfolio": {
-    "cash": 4016.7848755799296,
+    "cash": 8063.059255670855,
     "positions": {
       "core:BTC-USD": {
         "key": "core:BTC-USD",
@@ -30,34 +30,6 @@
         "hh": 769.590793347168,
         "bars": 0,
         "note": "long-term hold"
-      },
-      "index_pullback:SPY": {
-        "key": "index_pullback:SPY",
-        "strategy": "index_pullback",
-        "symbol": "SPY",
-        "qty": 2.6525926465898264,
-        "entry": 751.195261694336,
-        "stop": 690.892373046875,
-        "init_stop": 690.892373046875,
-        "entry_time": "2026-10-30 19:30:21.509312+00:00",
-        "entry_fee": 0.0,
-        "hh": 751.195261694336,
-        "bars": 0,
-        "note": ""
-      },
-      "index_pullback:QQQ": {
-        "key": "index_pullback:QQQ",
-        "strategy": "index_pullback",
-        "symbol": "QQQ",
-        "qty": 2.8988239579035993,
-        "entry": 687.3461566528321,
-        "stop": 632.1688134765625,
-        "init_stop": 632.1688134765625,
-        "entry_time": "2026-10-30 19:30:21.509312+00:00",
-        "entry_fee": 0.0,
-        "hh": 687.3461566528321,
-        "bars": 0,
-        "note": ""
       }
     },
     "peak": 10126.86004768825,
@@ -85,55 +57,26 @@
     "trend_daily:XRP-USD": "2026-11-03 00:00:00+00:00",
     "trend_daily:LINK-USD": "2026-11-03 00:00:00+00:00",
     "trend_daily:AVAX-USD": "2026-11-03 00:00:00+00:00",
-    "index_pullback:SPY": "2026-11-03",
-    "index_pullback:QQQ": "2026-11-03",
-    "index_pullback:IWM": "2026-11-03"
+    "index_pullback:SPY": "2026-11-04",
+    "index_pullback:QQQ": "2026-11-04",
+    "index_pullback:IWM": "2026-11-04"
   },
-  "last_tick": "2026-11-04 20:15:20.772950+00:00",
+  "last_tick": "2026-11-04 20:30:21.388897+00:00",
   "warnings": [],
   "prices": {
-    "BTC-USD": 80005.92,
-    "ETH-USD": 2407.14,
-    "SOL-USD": 94.53,
-    "XRP-USD": 1.2997,
-    "LINK-USD": 11.379,
-    "AVAX-USD": 8.735,
-    "SPY": 767.3800048828125,
-    "QQQ": 692.4349975585938,
-    "IWM": 283.6000061035156
+    "BTC-USD": 80159.99,
+    "ETH-USD": 2416.21,
+    "SOL-USD": 94.85,
+    "XRP-USD": 1.3048,
+    "LINK-USD": 11.414,
+    "AVAX-USD": 8.792,
+    "SPY": 768.1500244140625,
+    "QQQ": 693.3499755859375,
+    "IWM": 283.7900085449219
   },
   "shadow": {
-    "cash": 6000.119964010797,
-    "positions": {
-      "index_pullback:SPY": {
-        "key": "index_pullback:SPY",
-        "strategy": "index_pullback",
-        "symbol": "SPY",
-        "qty": 2.6624236093941276,
-        "entry": 751.195261694336,
-        "stop": 690.892373046875,
-        "init_stop": 690.892373046875,
-        "entry_time": "2026-10-30 19:30:21.509312+00:00",
-        "entry_fee": 0.0,
-        "hh": 751.195261694336,
-        "bars": 0,
-        "note": ""
-      },
-      "index_pullback:QQQ": {
-        "key": "index_pullback:QQQ",
-        "strategy": "index_pullback",
-        "symbol": "QQQ",
-        "qty": 2.9095674961332647,
-        "entry": 687.3461566528321,
-        "stop": 632.1688134765625,
-        "init_stop": 632.1688134765625,
-        "entry_time": "2026-10-30 19:30:21.509312+00:00",
-        "entry_fee": 0.0,
-        "hh": 687.3461566528321,
-        "bars": 0,
-        "note": ""
-      }
-    },
+    "cash": 10061.39053018322,
+    "positions": {},
     "peak": 10084.178457424241,
     "day": "2026-11-04",
     "day_start": 10002.38764774812,
@@ -159,18 +102,18 @@
     "bounce:XRP-USD": "2026-11-04 19:00:00+00:00",
     "bounce:LINK-USD": "2026-11-04 19:00:00+00:00",
     "bounce:AVAX-USD": "2026-11-04 19:00:00+00:00",
-    "index_pullback:SPY": "2026-11-03",
-    "index_pullback:QQQ": "2026-11-03",
-    "index_pullback:IWM": "2026-11-03"
+    "index_pullback:SPY": "2026-11-04",
+    "index_pullback:QQQ": "2026-11-04",
+    "index_pullback:IWM": "2026-11-04"
   },
   "berkshire": {
-    "cash": 10005.626782242765,
+    "cash": 10005.637918636361,
     "positions": {},
-    "peak": 10005.626782242765,
+    "peak": 10005.637918636361,
     "day": "2026-11-04",
     "day_start": 10004.725401225043,
     "start_cash": 10000.0,
-    "interest": 5.626782242784894
+    "interest": 5.637918636381141
   },
   "berkshire_eval": {
     "trend:BTC-USD": "2026-11-04 16:00:00+00:00",
@@ -191,9 +134,9 @@
     "bounce:XRP-USD": "2026-11-04 19:00:00+00:00",
     "bounce:LINK-USD": "2026-11-04 19:00:00+00:00",
     "bounce:AVAX-USD": "2026-11-04 19:00:00+00:00",
-    "index_pullback:SPY": "2026-11-03",
-    "index_pullback:QQQ": "2026-11-03",
-    "index_pullback:IWM": "2026-11-03"
+    "index_pullback:SPY": "2026-11-04",
+    "index_pullback:QQQ": "2026-11-04",
+    "index_pullback:IWM": "2026-11-04"
   },
-  "berkshire_last": "2026-11-04 20:15:20.772950+00:00"
+  "berkshire_last": "2026-11-04 20:30:21.388897+00:00"
 }
