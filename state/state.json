@@ -89,15 +89,15 @@
     "index_pullback:QQQ": "2026-11-03",
     "index_pullback:IWM": "2026-11-03"
   },
-  "last_tick": "2026-11-04 01:15:21.432715+00:00",
+  "last_tick": "2026-11-04 01:30:21.215495+00:00",
   "warnings": [],
   "prices": {
-    "BTC-USD": 76794.23,
-    "ETH-USD": 2260.49,
-    "SOL-USD": 91.68,
-    "XRP-USD": 1.2529,
-    "LINK-USD": 10.805,
-    "AVAX-USD": 8.353,
+    "BTC-USD": 76824.23,
+    "ETH-USD": 2259.81,
+    "SOL-USD": 91.73,
+    "XRP-USD": 1.2491,
+    "LINK-USD": 10.831,
+    "AVAX-USD": 8.346,
     "SPY": NaN,
     "QQQ": NaN,
     "IWM": NaN
@@ -164,13 +164,13 @@
     "index_pullback:IWM": "2026-11-03"
   },
   "berkshire": {
-    "cash": 10004.781039548427,
+    "cash": 10004.792164699204,
     "positions": {},
-    "peak": 10004.781039548427,
+    "peak": 10004.792164699204,
     "day": "2026-11-04",
     "day_start": 10004.725401225043,
     "start_cash": 10000.0,
-    "interest": 4.781039548446491
+    "interest": 4.792164699224281
   },
   "berkshire_eval": {
     "trend:BTC-USD": "2026-11-03 20:00:00+00:00",
@@ -195,5 +195,5 @@
     "index_pullback:QQQ": "2026-11-03",
     "index_pullback:IWM": "2026-11-03"
   },
-  "berkshire_last": "2026-11-04 01:15:21.432715+00:00"
+  "berkshire_last": "2026-11-04 01:30:21.215495+00:00"
 }
