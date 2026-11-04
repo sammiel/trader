@@ -1,27 +1,27 @@
 {
-  "updated": "2026-11-04 15:45:21.578833+00:00",
+  "updated": "2026-11-04 16:00:20.575905+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10090.14,
+  "equity": 10094.73,
   "cash": 4016.78,
-  "return_pct": 0.9,
+  "return_pct": 0.95,
   "max_drawdown_pct": -1.12,
   "benchmark_return_pct": {
-    "BTC-USD": 3.87,
-    "SPY": -0.47
+    "BTC-USD": 4.08,
+    "SPY": -0.37
   },
   "by_strategy": {
     "core": {
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": 32.89
+      "unrealized": 35.99
     },
     "index_pullback": {
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": 58.25
+      "unrealized": 59.74
     }
   },
   "open_positions": [
@@ -29,44 +29,44 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 80194.48,
+      "price": 80359.14,
       "stop": 0.0,
-      "value": 1036.64,
-      "unrealized": 37.84,
-      "ret_pct": 3.79,
+      "value": 1038.77,
+      "unrealized": 39.96,
+      "ret_pct": 4.0,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "core",
       "symbol": "SPY",
       "entry": 769.590793347168,
-      "price": 765.7750244140625,
+      "price": 766.530029296875,
       "stop": 0.0,
-      "value": 993.35,
-      "unrealized": -4.95,
-      "ret_pct": -0.5,
+      "value": 994.33,
+      "unrealized": -3.97,
+      "ret_pct": -0.4,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "index_pullback",
       "symbol": "SPY",
       "entry": 751.195261694336,
-      "price": 765.7750244140625,
+      "price": 766.530029296875,
       "stop": 690.892373046875,
-      "value": 2031.29,
-      "unrealized": 38.67,
-      "ret_pct": 1.94,
+      "value": 2033.29,
+      "unrealized": 40.68,
+      "ret_pct": 2.04,
       "since": "2026-10-30 19:30:21.509312+00:00"
     },
     {
       "strategy": "index_pullback",
       "symbol": "QQQ",
       "entry": 687.3461566528321,
-      "price": 694.0999755859375,
+      "price": 693.9199829101562,
       "stop": 632.1688134765625,
-      "value": 2012.07,
-      "unrealized": 19.58,
-      "ret_pct": 0.98,
+      "value": 2011.55,
+      "unrealized": 19.06,
+      "ret_pct": 0.96,
       "since": "2026-10-30 19:30:21.509312+00:00"
     }
   ],
@@ -579,28 +579,32 @@
     [
       "2026-11-04 15:00:00",
       10090.14
+    ],
+    [
+      "2026-11-04 16:00:00",
+      10094.73
     ]
   ],
   "prices": {
-    "BTC-USD": 80194.48,
-    "ETH-USD": 2420.75,
-    "SOL-USD": 96.33,
-    "XRP-USD": 1.3165,
-    "LINK-USD": 11.602,
-    "AVAX-USD": 8.957,
-    "SPY": 765.7750244140625,
-    "QQQ": 694.0999755859375,
-    "IWM": 282.3299865722656
+    "BTC-USD": 80359.14,
+    "ETH-USD": 2428.73,
+    "SOL-USD": 96.86,
+    "XRP-USD": 1.3173,
+    "LINK-USD": 11.624,
+    "AVAX-USD": 8.965,
+    "SPY": 766.530029296875,
+    "QQQ": 693.9199829101562,
+    "IWM": 282.5400085449219
   },
   "shadow": {
-    "equity": 10058.47,
-    "return_pct": 0.58,
+    "equity": 10059.95,
+    "return_pct": 0.6,
     "by_strategy": {
       "index_pullback": {
         "trades": 0,
         "wins": 0,
         "realized": 0.0,
-        "unrealized": 58.47,
+        "unrealized": 59.96,
         "open": 2
       }
     },
@@ -610,23 +614,23 @@
         "symbol": "SPY",
         "entry": 751.195261694336,
         "stop": 690.892373046875,
-        "price": 765.7750244140625
+        "price": 766.530029296875
       },
       {
         "strategy": "index_pullback",
         "symbol": "QQQ",
         "entry": 687.3461566528321,
         "stop": 632.1688134765625,
-        "price": 694.0999755859375
+        "price": 693.9199829101562
       }
     ]
   },
   "berkshire": {
-    "equity": 10005.43,
+    "equity": 10005.44,
     "return_pct": 0.054,
-    "floor": 10002.71,
-    "cushion": 2.71,
-    "interest": 5.43,
+    "floor": 10002.72,
+    "cushion": 2.72,
+    "interest": 5.44,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -4407,6 +4411,14 @@
       "shadow": 10058.47,
       "btc_hold": 10387.12,
       "spy_hold": 9953.4
+    },
+    {
+      "t": "2026-11-04T16:00Z",
+      "equity": 10094.73,
+      "berkshire": 10005.44,
+      "shadow": 10059.95,
+      "btc_hold": 10408.44,
+      "spy_hold": 9963.22
     }
   ],
   "active_mode": "normal"
