@@ -1,14 +1,14 @@
 {
-  "updated": "2026-11-05 00:45:21.414790+00:00",
+  "updated": "2026-11-05 01:00:20.842660+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 10101.12,
+  "equity": NaN,
   "cash": 8063.06,
-  "return_pct": 1.01,
+  "return_pct": NaN,
   "max_drawdown_pct": -1.12,
   "benchmark_return_pct": {
-    "BTC-USD": 4.55,
-    "SPY": -0.33
+    "BTC-USD": 4.22,
+    "SPY": NaN
   },
   "by_strategy": {
     "index_pullback": {
@@ -22,7 +22,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": 40.95
+      "unrealized": NaN
     }
   },
   "open_positions": [
@@ -30,22 +30,22 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 80714.85,
+      "price": 80467.48,
       "stop": 0.0,
-      "value": 1043.36,
-      "unrealized": 44.56,
-      "ret_pct": 4.46,
+      "value": 1040.17,
+      "unrealized": 41.36,
+      "ret_pct": 4.14,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
       "strategy": "core",
       "symbol": "SPY",
       "entry": 769.590793347168,
-      "price": 766.8099975585938,
+      "price": NaN,
       "stop": 0.0,
-      "value": 994.7,
-      "unrealized": -3.61,
-      "ret_pct": -0.36,
+      "value": NaN,
+      "unrealized": NaN,
+      "ret_pct": NaN,
       "since": "2026-10-30 13:23:43.022220+00:00"
     }
   ],
@@ -624,15 +624,15 @@
     ]
   ],
   "prices": {
-    "BTC-USD": 80714.85,
-    "ETH-USD": 2426.75,
-    "SOL-USD": 95.9,
-    "XRP-USD": 1.3074,
-    "LINK-USD": 11.453,
-    "AVAX-USD": 8.761,
-    "SPY": 766.8099975585938,
-    "QQQ": 691.9500122070312,
-    "IWM": 284.0199890136719
+    "BTC-USD": 80467.48,
+    "ETH-USD": 2419.02,
+    "SOL-USD": 95.71,
+    "XRP-USD": 1.302,
+    "LINK-USD": 11.385,
+    "AVAX-USD": 8.733,
+    "SPY": NaN,
+    "QQQ": NaN,
+    "IWM": NaN
   },
   "shadow": {
     "equity": 10061.39,
@@ -647,11 +647,11 @@
     "open_positions": []
   },
   "berkshire": {
-    "equity": 10005.83,
+    "equity": 10005.84,
     "return_pct": 0.058,
-    "floor": 10002.91,
-    "cushion": 2.91,
-    "interest": 5.83,
+    "floor": 10002.92,
+    "cushion": 2.92,
+    "interest": 5.84,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
