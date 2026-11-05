@@ -2,3 +2,5 @@ time,strategy,symbol,price,stop,bar,action
 2026-10-30 19:30:21.509312+00:00,index_pullback,SPY,750.969970703125,690.892373,2026-10-30,opened
 2026-10-30 19:30:21.509312+00:00,index_pullback,QQQ,687.1400146484375,632.168813,2026-10-30,opened
 2026-11-05 14:00:20.670494+00:00,bounce,ETH-USD,2385.14,2332.432937,2026-11-05 13:00:00+00:00,skipped: strategy disabled by backtest gate
+2026-11-05 15:00:20.686947+00:00,bounce,ETH-USD,2336.88,2280.597013,2026-11-05 14:00:00+00:00,skipped: strategy disabled by backtest gate
+2026-11-05 15:00:20.686947+00:00,bounce,XRP-USD,1.2766,1.243728,2026-11-05 14:00:00+00:00,skipped: strategy disabled by backtest gate

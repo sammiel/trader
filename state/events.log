@@ -11,3 +11,4 @@
 2026-11-04 20:30Z  [shadow] EXIT index_pullback:SPY (target) 767.9196 pnl +44.53 (0.277R)
 2026-11-04 20:30Z  [shadow] EXIT index_pullback:QQQ (target) 693.1420 pnl +16.86 (0.105R)
 2026-11-05 14:00Z  [shadow] BUY bounce:ETH-USD qty=0.842999 @ 2387.0481 stop 2332.4329 ($2012)
+2026-11-05 15:00Z  [shadow] BUY bounce:XRP-USD qty=1568.083870 @ 1.2776 stop 1.2437 ($2003)
