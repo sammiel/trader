@@ -1,8 +1,9 @@
 name: tick
 # Live paper-trading loop: every 15 minutes (GitHub may delay or drop scheduled runs).
 on:
-  schedule:
-    - cron: "*/15 * * * *"
+  # Paused after the one-week paper test ended (6 Nov 2026). Uncomment to resume.
+  # schedule:
+  #   - cron: "*/15 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
