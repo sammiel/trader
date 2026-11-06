@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-06 08:45:20.725013+00:00",
+  "updated": "2026-11-06 09:00:21.218115+00:00",
   "started": "2026-10-30 13:23:43.022220+00:00",
   "starting_cash": 10000.0,
-  "equity": 9990.76,
+  "equity": 9990.78,
   "cash": 8063.06,
   "return_pct": -0.09,
   "max_drawdown_pct": -1.39,
@@ -22,7 +22,7 @@
       "trades": 0,
       "wins": 0,
       "realized": 0.0,
-      "unrealized": -69.41
+      "unrealized": -69.39
     }
   },
   "open_positions": [
@@ -30,11 +30,11 @@
       "strategy": "core",
       "symbol": "BTC-USD",
       "entry": 77267.49458399999,
-      "price": 75570.23,
+      "price": 75571.78,
       "stop": 0.0,
-      "value": 976.86,
-      "unrealized": -21.94,
-      "ret_pct": -2.2,
+      "value": 976.88,
+      "unrealized": -21.92,
+      "ret_pct": -2.19,
       "since": "2026-10-30 13:23:43.022220+00:00"
     },
     {
@@ -768,15 +768,19 @@
     [
       "2026-11-06 08:00:00",
       9990.76
+    ],
+    [
+      "2026-11-06 09:00:00",
+      9990.78
     ]
   ],
   "prices": {
-    "BTC-USD": 75570.23,
-    "ETH-USD": 2226.33,
-    "SOL-USD": 89.67,
-    "XRP-USD": 1.1882,
-    "LINK-USD": 10.746,
-    "AVAX-USD": 8.263,
+    "BTC-USD": 75571.78,
+    "ETH-USD": 2223.52,
+    "SOL-USD": 89.49,
+    "XRP-USD": 1.1862,
+    "LINK-USD": 10.713,
+    "AVAX-USD": 8.232,
     "SPY": 733.0,
     "QQQ": 647.0499877929688,
     "IWM": 270.9800109863281
@@ -799,11 +803,11 @@
     "open_positions": []
   },
   "berkshire": {
-    "equity": 10007.25,
+    "equity": 10007.26,
     "return_pct": 0.073,
     "floor": 10003.63,
     "cushion": 3.63,
-    "interest": 7.25,
+    "interest": 7.26,
     "trades": 0,
     "realized": 0.0,
     "open_positions": []
@@ -5799,6 +5803,14 @@
       "berkshire": 10007.25,
       "shadow": 9950.63,
       "btc_hold": 9788.16,
+      "spy_hold": 9527.4
+    },
+    {
+      "t": "2026-11-06T09:00Z",
+      "equity": 9990.78,
+      "berkshire": 10007.26,
+      "shadow": 9950.63,
+      "btc_hold": 9788.36,
       "spy_hold": 9527.4
     }
   ],
