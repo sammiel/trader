@@ -14,3 +14,4 @@
 2026-11-05 15:00Z  [shadow] BUY bounce:XRP-USD qty=1568.083870 @ 1.2776 stop 1.2437 ($2003)
 2026-11-05 15:15Z  [shadow] STOP bounce:ETH-USD exit 2330.5670 pnl -51.59 (-1.121R)
 2026-11-05 16:00Z  [shadow] STOP bounce:XRP-USD exit 1.2424 pnl -59.17 (-1.113R)
+2026-11-06 21:30Z  test window over: no trading (edit TEST_END in bot/run.py to extend)
